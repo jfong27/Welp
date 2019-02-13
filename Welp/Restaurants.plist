@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>San Luis Obispo</key>
+	<array>
+		<string>Firestone Grill</string>
+		<string>Costco Snack Bar</string>
+		<string>High Street Deli</string>
+		<string>Splash Cafe</string>
+		<string>G Brothers Smokehouse</string>
+	</array>
+	<key>Atascadero</key>
+	<array>
+		<string>In N Out</string>
+		<string>Sylvester&apos;s Burgers</string>
+		<string>La Mexicana</string>
+	</array>
+	<key>Arroyo Grande</key>
+	<array>
+		<string>In N Out</string>
+		<string>McClintock&apos;s Saloon</string>
+		<string>Branch Street Deli</string>
+		<string>Fruitiland</string>
+	</array>
+</dict>
+</plist>
