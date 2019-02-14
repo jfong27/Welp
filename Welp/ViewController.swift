@@ -11,12 +11,13 @@ import CoreLocation
 import MapKit
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
+    
 
     let locationManager = CLLocationManager()
     
-    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var searchBar: UISearchBar!
-    
     @IBOutlet weak var featuredIn: UILabel!
     
     lazy var geocoder = CLGeocoder()
@@ -28,10 +29,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters 
             locationManager.startUpdatingLocation()
         }
         
+        searchBar.alpha = 1.0
+        searchBar.backgroundColor = UIColor.clear
+        searchBar.backgroundImage = UIImage()
+        searchBar.barTintColor = UIColor.clear
     }
     
     @IBAction func mapButton(_ sender: UIButton) {
@@ -63,13 +68,23 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         } else {
             if let placemarks = placemarks, let placemark = placemarks.first {
                 if let city = placemark.locality {
-                    featuredIn.text = "Featured in " + city
+                    featuredIn.text = "Search for Water in San Luis Obispo"
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                        self.featuredIn.text = "Search for Water in Paris"
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
+                        self.featuredIn.text = "Search for Water in Hong Kong"
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 6) {
+                        self.featuredIn.text = "Search for Water in " + city
+                    }
+                    
                 }
             } else {
                 featuredIn.text = "No Matching Addresses Found"
             }
         }
     }
-
+    
 }
 

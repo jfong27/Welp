@@ -10,6 +10,10 @@
 		3B318C5A310F07248A8FEFE9 /* Pods_Welp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90D5993A3FB480780743D40E /* Pods_Welp.framework */; };
 		963B1EDE22014EA300388F67 /* WaterFountain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B1EDD22014EA300388F67 /* WaterFountain.swift */; };
 		963B1EE622016DF500388F67 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B1EE522016DF500388F67 /* MapVC.swift */; };
+		963D15142214F1DC0000747D /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963D15132214F1DC0000747D /* SignupVC.swift */; };
+		963D15182215247E0000747D /* WFCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963D15172215247E0000747D /* WFCell.swift */; };
+		963D4B912214912A00090566 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 963D4B902214912A00090566 /* MapKit.framework */; };
+		963D4B932214B8A600090566 /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963D4B922214B8A600090566 /* LogInVC.swift */; };
 		9644333A21EF030B000D3C38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9644333921EF030B000D3C38 /* AppDelegate.swift */; };
 		9644333C21EF030B000D3C38 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9644333B21EF030B000D3C38 /* ViewController.swift */; };
 		9644333F21EF030B000D3C38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9644333D21EF030B000D3C38 /* Main.storyboard */; };
@@ -24,6 +28,10 @@
 		90D5993A3FB480780743D40E /* Pods_Welp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Welp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		963B1EDD22014EA300388F67 /* WaterFountain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterFountain.swift; sourceTree = "<group>"; };
 		963B1EE522016DF500388F67 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
+		963D15132214F1DC0000747D /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
+		963D15172215247E0000747D /* WFCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WFCell.swift; sourceTree = "<group>"; };
+		963D4B902214912A00090566 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		963D4B922214B8A600090566 /* LogInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
 		9644333621EF030B000D3C38 /* Welp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Welp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9644333921EF030B000D3C38 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9644333B21EF030B000D3C38 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -41,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				963D4B912214912A00090566 /* MapKit.framework in Frameworks */,
 				3B318C5A310F07248A8FEFE9 /* Pods_Welp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -54,13 +63,13 @@
 				8C260627F81F7D10B3B8E068 /* Pods-Welp.debug.xcconfig */,
 				9B37B81297CBF4C35F3779F2 /* Pods-Welp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
 		92B7F2347855487FBFB4336D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				963D4B902214912A00090566 /* MapKit.framework */,
 				90D5993A3FB480780743D40E /* Pods_Welp.framework */,
 			);
 			name = Frameworks;
@@ -97,6 +106,9 @@
 				9644334221EF030B000D3C38 /* LaunchScreen.storyboard */,
 				9644334521EF030B000D3C38 /* Info.plist */,
 				963B1EDD22014EA300388F67 /* WaterFountain.swift */,
+				963D4B922214B8A600090566 /* LogInVC.swift */,
+				963D15132214F1DC0000747D /* SignupVC.swift */,
+				963D15172215247E0000747D /* WFCell.swift */,
 			);
 			path = Welp;
 			sourceTree = "<group>";
@@ -135,6 +147,11 @@
 				TargetAttributes = {
 					9644333521EF030B000D3C38 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -202,6 +219,10 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Welp/Pods-Welp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -209,6 +230,10 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -225,7 +250,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				96954E77220BF20B007555B4 /* ProfileVC.swift in Sources */,
+				963D15142214F1DC0000747D /* SignupVC.swift in Sources */,
 				963B1EDE22014EA300388F67 /* WaterFountain.swift in Sources */,
+				963D4B932214B8A600090566 /* LogInVC.swift in Sources */,
+				963D15182215247E0000747D /* WFCell.swift in Sources */,
 				963B1EE622016DF500388F67 /* MapVC.swift in Sources */,
 				9644333C21EF030B000D3C38 /* ViewController.swift in Sources */,
 				9644333A21EF030B000D3C38 /* AppDelegate.swift in Sources */,
