@@ -32,6 +32,9 @@ class LogInVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
         
         loginButton.alpha = 0.8
         loginButton.layer.cornerRadius = 15.0
+        
+        emailField.keyboardType = .emailAddress
+        
         self.navigationController?.isNavigationBarHidden = true
         
     }
@@ -107,6 +110,15 @@ class LogInVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
                 }
             })
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailField {
+            pwdField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        return false
     }
     
     @IBAction func googleButton(_ sender: Any) {

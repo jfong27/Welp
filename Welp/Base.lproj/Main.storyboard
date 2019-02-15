@@ -111,7 +111,7 @@
                                 <attributedString key="attributedText">
                                     <fragment content="Hometown">
                                         <attributes>
-                                            <color key="NSColor" red="0.83424979200000005" green="1" blue="0.85762425099999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="NSColor" red="0.83424979200937432" green="1" blue="0.8576242509505444" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <font key="NSFont" size="24" name="DINAlternate-Bold"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -129,7 +129,7 @@
                                 <attributedString key="attributedText">
                                     <fragment content="Username">
                                         <attributes>
-                                            <color key="NSColor" red="0.83424979200000005" green="1" blue="0.85762425099999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="NSColor" red="0.83424979200937432" green="1" blue="0.8576242509505444" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <font key="NSFont" size="24" name="DINAlternate-Bold"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -175,7 +175,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xlg-ew-8VT">
-                                <rect key="frame" x="0.0" y="195" width="375" height="28"/>
+                                <rect key="frame" x="0.0" y="166" width="375" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Log In To Welp">
@@ -189,7 +189,7 @@
                                 <color key="highlightedColor" red="0.117501523" green="0.71246077919999995" blue="0.42677330559999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </label>
                             <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9JY-Vv-cKe">
-                                <rect key="frame" x="32" y="246" width="320" height="236"/>
+                                <rect key="frame" x="27" y="208" width="320" height="236"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QQ4-rA-J9W">
@@ -256,34 +256,23 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q51-AA-2il">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q51-AA-2il">
                                 <rect key="frame" x="104" y="623" width="177" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <state key="normal" title="Or Continue With"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jID-2q-lkO">
-                                <rect key="frame" x="233" y="661" width="48" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jID-2q-lkO">
+                                <rect key="frame" x="260" y="661" width="55" height="55"/>
                                 <state key="normal" image="facebook"/>
                                 <connections>
                                     <action selector="facebookButton:" destination="tXj-ib-8dK" eventType="touchUpInside" id="pqI-lL-lcp"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0LL-Lk-N9h">
-                                <rect key="frame" x="168" y="661" width="48" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0LL-Lk-N9h">
+                                <rect key="frame" x="160" y="661" width="55" height="55"/>
                                 <state key="normal" image="google"/>
                                 <connections>
                                     <action selector="googleButton:" destination="tXj-ib-8dK" eventType="touchUpInside" id="RS7-K3-Yfz"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZP-nP-6tH">
-                                <rect key="frame" x="104" y="661" width="48" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="twitter"/>
-                                <connections>
-                                    <action selector="twitterButton:" destination="tXj-ib-8dK" eventType="touchUpInside" id="fB8-gM-b7H"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aGj-9R-EdD">
@@ -293,10 +282,25 @@
                                     <action selector="signupPress:" destination="tXj-ib-8dK" eventType="touchUpInside" id="Uqw-O8-WmI"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZP-nP-6tH">
+                                <rect key="frame" x="61" y="661" width="55" height="55"/>
+                                <state key="normal" image="twitter"/>
+                                <connections>
+                                    <action selector="twitterButton:" destination="tXj-ib-8dK" eventType="touchUpInside" id="fB8-gM-b7H"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.95409092756166847" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Daf-71-GuD" firstAttribute="bottom" secondItem="IZP-nP-6tH" secondAttribute="bottom" constant="20" id="1GI-1G-Bow"/>
+                            <constraint firstItem="q51-AA-2il" firstAttribute="centerX" secondItem="Daf-71-GuD" secondAttribute="centerX" id="5Hn-Hu-2e4"/>
+                            <constraint firstItem="Daf-71-GuD" firstAttribute="bottom" secondItem="0LL-Lk-N9h" secondAttribute="bottom" constant="20" id="N4w-ou-0A8"/>
                             <constraint firstItem="Daf-71-GuD" firstAttribute="trailing" secondItem="aGj-9R-EdD" secondAttribute="trailing" constant="23" id="ONC-wl-K9C"/>
+                            <constraint firstItem="jID-2q-lkO" firstAttribute="leading" secondItem="0LL-Lk-N9h" secondAttribute="trailing" constant="17" id="PTk-BO-DV4"/>
+                            <constraint firstItem="0LL-Lk-N9h" firstAttribute="leading" secondItem="IZP-nP-6tH" secondAttribute="trailing" constant="16" id="aex-iC-EKy"/>
+                            <constraint firstItem="0LL-Lk-N9h" firstAttribute="top" secondItem="q51-AA-2il" secondAttribute="bottom" constant="8" id="dtN-6n-79j"/>
+                            <constraint firstItem="Daf-71-GuD" firstAttribute="bottom" secondItem="jID-2q-lkO" secondAttribute="bottom" constant="20" id="fAp-4K-YtA"/>
+                            <constraint firstItem="0LL-Lk-N9h" firstAttribute="centerX" secondItem="Daf-71-GuD" secondAttribute="centerX" id="fyY-Sq-9PL"/>
                             <constraint firstItem="aGj-9R-EdD" firstAttribute="top" secondItem="Daf-71-GuD" secondAttribute="top" constant="12" id="zfn-fg-bbE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Daf-71-GuD"/>
@@ -324,8 +328,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bE2-z0-qgN">
+                                <rect key="frame" x="0.0" y="159" width="375" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Create Welp Profile">
+                                        <attributes>
+                                            <color key="NSColor" red="0.1233379915356636" green="0.79217594861984253" blue="0.38681000471115112" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="24" name="DINAlternate-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <color key="highlightedColor" red="0.117501523" green="0.71246077919999995" blue="0.42677330559999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </label>
                             <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fGV-do-qFU">
-                                <rect key="frame" x="27" y="246" width="320" height="233"/>
+                                <rect key="frame" x="27" y="195" width="320" height="233"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zel-Gx-0sJ">
@@ -393,20 +411,6 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bE2-z0-qgN">
-                                <rect key="frame" x="0.0" y="196" width="375" height="28"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="Create Welp Profile">
-                                        <attributes>
-                                            <color key="NSColor" red="0.1233379915356636" green="0.79217594861984253" blue="0.38681000471115112" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="24" name="DINAlternate-Bold"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <color key="highlightedColor" red="0.117501523" green="0.71246077919999995" blue="0.42677330559999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.95286828279495239" green="0.95298224687576294" blue="0.95282942056655884" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="JzW-mU-Twu"/>
@@ -459,11 +463,34 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ait-yr-kFS">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="802"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="4Ln-Wq-6k2" id="Wfr-pA-n5Y"/>
+                                </connections>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YDF-Gi-8rt">
+                                <rect key="frame" x="96" y="74" width="175" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.117501523" green="0.71246077919999995" blue="0.42677330559999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.61060464889999999" green="0.26757862999999998" blue="0.66666666669999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Add New Water Fountain">
+                                            <attributes>
+                                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="13" name=".SFNSText"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="addReview:" destination="4Ln-Wq-6k2" eventType="touchUpInside" id="mst-bE-475"/>
+                                </connections>
+                            </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" highlighted="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="qd6-up-W9I">
                                 <rect key="frame" x="0.0" y="38" width="375" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.073807458290037778" green="0.42227831956424011" blue="0.58074901521508471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.073807458290000003" green="0.42227831960000001" blue="0.5807490152" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <segments>
                                     <segment title="Standard"/>
                                     <segment title="Satellite"/>
@@ -473,14 +500,37 @@
                                     <action selector="mapTypeChange:" destination="4Ln-Wq-6k2" eventType="valueChanged" id="r6c-vF-EvC"/>
                                 </connections>
                             </segmentedControl>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="marker" translatesAutoresizingMaskIntoConstraints="NO" id="IeH-fW-VQa">
+                                <rect key="frame" x="161" y="379" width="45" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ec-8H-OGk">
+                                <rect key="frame" x="45" y="112" width="276" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWE-l0-mqE">
+                                <rect key="frame" x="271" y="74" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="cancel"/>
+                                <connections>
+                                    <action selector="cancelButton:" destination="4Ln-Wq-6k2" eventType="touchUpInside" id="Fws-Tx-hsk"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.117501523" green="0.71246077919999995" blue="0.42677330559999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="JhL-Iz-szv"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="compass" id="cHS-ix-FCJ"/>
                     <connections>
+                        <outlet property="addButton" destination="YDF-Gi-8rt" id="eAS-v4-pgj"/>
+                        <outlet property="cancelButton" destination="RWE-l0-mqE" id="eIq-CN-oOH"/>
+                        <outlet property="coordLabel" destination="4Ec-8H-OGk" id="VD8-Nq-CAX"/>
                         <outlet property="map" destination="ait-yr-kFS" id="QfX-4l-Emz"/>
                         <outlet property="mapTypeSelector" destination="qd6-up-W9I" id="Rwd-56-C0c"/>
+                        <outlet property="marker" destination="IeH-fW-VQa" id="zk2-5n-7bK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MMt-4J-J0H" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -489,16 +539,18 @@
         </scene>
     </scenes>
     <resources>
+        <image name="cancel" width="30" height="30"/>
         <image name="compass" width="30" height="30"/>
         <image name="facebook" width="67.5" height="67.5"/>
         <image name="google" width="67.5" height="67.5"/>
         <image name="happy" width="30" height="30"/>
         <image name="homeImage" width="1365" height="2048"/>
+        <image name="marker" width="30" height="30"/>
         <image name="search" width="30" height="30"/>
         <image name="twitter" width="67.5" height="67.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fXY-Fg-DMb"/>
+        <segue reference="5z9-Fh-Jsb"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.117501523" green="0.71246077919999995" blue="0.42677330559999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

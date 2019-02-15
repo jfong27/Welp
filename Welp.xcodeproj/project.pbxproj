@@ -21,6 +21,7 @@
 		9644334421EF030B000D3C38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9644334221EF030B000D3C38 /* LaunchScreen.storyboard */; };
 		967AC6C12213FD25009B2AC8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 967AC6C02213FD25009B2AC8 /* GoogleService-Info.plist */; };
 		96954E77220BF20B007555B4 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96954E76220BF20B007555B4 /* ProfileVC.swift */; };
+		96FA53872216986200054526 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FA53862216986200054526 /* Helper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		9644334521EF030B000D3C38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		967AC6C02213FD25009B2AC8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		96954E76220BF20B007555B4 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		96FA53862216986200054526 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		9B37B81297CBF4C35F3779F2 /* Pods-Welp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Welp.release.xcconfig"; path = "Target Support Files/Pods-Welp/Pods-Welp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,6 +111,7 @@
 				963D4B922214B8A600090566 /* LogInVC.swift */,
 				963D15132214F1DC0000747D /* SignupVC.swift */,
 				963D15172215247E0000747D /* WFCell.swift */,
+				96FA53862216986200054526 /* Helper.swift */,
 			);
 			path = Welp;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 				963B1EDE22014EA300388F67 /* WaterFountain.swift in Sources */,
 				963D4B932214B8A600090566 /* LogInVC.swift in Sources */,
 				963D15182215247E0000747D /* WFCell.swift in Sources */,
+				96FA53872216986200054526 /* Helper.swift in Sources */,
 				963B1EE622016DF500388F67 /* MapVC.swift in Sources */,
 				9644333C21EF030B000D3C38 /* ViewController.swift in Sources */,
 				9644333A21EF030B000D3C38 /* AppDelegate.swift in Sources */,

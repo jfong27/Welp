@@ -23,14 +23,25 @@ class SignupVC: UIViewController {
         signupBox.layer.cornerRadius = 6;
         signupBox.layer.masksToBounds = true;
         signupBox.layer.shadowOpacity = 10.0
-        
+
         signupButton.alpha = 0.8
+        
+        emailField.keyboardType = .emailAddress
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if emailField.hasText && pwdField.hasText {
             signupButton.alpha = 1.0
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailField {
+            pwdField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        return false
     }
     
     @IBAction func signupButton(_ sender: Any) {

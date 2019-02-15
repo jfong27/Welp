@@ -10,12 +10,10 @@ import UIKit
 import CoreLocation
 import MapKit
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
-    
+class ViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate {
 
     let locationManager = CLLocationManager()
     
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var featuredIn: UILabel!
@@ -84,6 +82,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 featuredIn.text = "No Matching Addresses Found"
             }
         }
+    }
+    
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print("HI")
+        searchBar.keyboardAppearance = .dark
+        
     }
     
 }
