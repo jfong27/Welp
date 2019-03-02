@@ -8,11 +8,18 @@
 
 import MapKit
 import UIKit
+import Firebase
+import FirebaseDatabase
+
+//NOTE: CLFloor can tell you what floor you are on.
 
 class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     let locationManager = CLLocationManager()
     var didSetLocation = false
+    var dbRef: DatabaseReference!
+    var lat = 0.0
+    var lon = 0.0
     
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var mapTypeSelector: UISegmentedControl!
@@ -23,6 +30,7 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.dbRef = Database.database().reference()
         
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
@@ -40,9 +48,6 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         marker.isHidden = true
         cancelButton.isHidden = true
     }
-    
-    
-    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
@@ -70,25 +75,49 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         print(String(mapView.centerCoordinate.latitude))
         print(String(mapView.centerCoordinate.longitude))
         print("A")
-        let lat = String(mapView.centerCoordinate.latitude).prefix(8)
-        let lon = String(mapView.centerCoordinate.longitude).prefix(8)
-        coordLabel.text =  "(" + lat + ", " + lon + ")"
+        lat = mapView.centerCoordinate.latitude
+        lon = mapView.centerCoordinate.longitude
+        let latStr = String(lat).prefix(8)
+        let lonStr = String(lon).prefix(8)
+        coordLabel.text =  "(" + latStr + ", " + lonStr + ")"
     }
     
     @IBAction func addReview(_ sender: Any) {
-        marker.isHidden = false
-        coordLabel.isHidden = false
-        cancelButton.isHidden = false
+        if ((addButton.titleLabel?.text!)!) == "Add New Water Fountain" {
+            marker.isHidden = false
+            coordLabel.isHidden = false
+            cancelButton.isHidden = false
+            
+            addButton.setAttributedTitle(NSAttributedString(string: "Confirm Location"), for: .normal)
+            addButton.setTitleColor(.white, for: .normal)
+            
+            Helper.vibrate()
+        } else {
+            uploadToFirebase(latitude: lat, longitude: lon)
+        }
         
-        addButton.setAttributedTitle(NSAttributedString(string: "Confirm Location"), for: .normal)
-        addButton.setTitleColor(.white, for: .normal)
-        
-        Helper.vibrate()
         
     }
     
     @IBAction func mapTypeChange(_ sender: UISegmentedControl) {
         map.mapType = MKMapType(rawValue: UInt(sender.selectedSegmentIndex))!
     }
-    
+
+    func uploadToFirebase(latitude: Double, longitude: Double) {
+
+        var dict = [String:Any]()
+
+        let id = 0
+
+        dict.updateValue(id, forKey: "locationId")
+        dict.updateValue(latitude, forKey: "latitude")
+        dict.updateValue(longitude, forKey: "longitude")
+
+        dbRef.child("locations")
+             .child("waterFountains")
+             .child(String(id)).setValue(dict)
+
+
+    }
+
 }

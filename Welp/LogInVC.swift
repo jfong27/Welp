@@ -12,20 +12,17 @@ import Firebase
 import FBSDKLoginKit
 
 class LogInVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
- 
-    
-    
-    
     
     @IBOutlet weak var viewBox: UIView!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var pwdField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var fbButton: UIButton!
+    @IBOutlet weak var fbButton: FBSDKLoginButton!
+    @IBOutlet weak var loading: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
         viewBox.layer.cornerRadius = 6;
         viewBox.layer.masksToBounds = true;
         viewBox.layer.shadowOpacity = 10.0
@@ -36,7 +33,12 @@ class LogInVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
         emailField.keyboardType = .emailAddress
         
         self.navigationController?.isNavigationBarHidden = true
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        emailField.text = ""
+        pwdField.text = ""
+        loading.isHidden = true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -46,6 +48,7 @@ class LogInVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     }
     
     @IBAction func loginPress(_ sender: Any) {
+        loading.isHidden = false
         if let email = emailField.text, let password = pwdField.text {
             Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
                 if let error = error {
@@ -55,7 +58,8 @@ class LogInVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
                     }))
                     self.present(alert, animated: true, completion: nil)
                 } else {
-                    self.performSegue(withIdentifier: "loginSegue", sender: sender)
+                    
+                    self.performSegue(withIdentifier: "RootSegue", sender: sender)
                 }
             }
         }
@@ -66,6 +70,7 @@ class LogInVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     }
 
     func loginButton(_ fbButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        print("JKLASDLKJSAD")
         if let error = error {
             print(error.localizedDescription)
             return
@@ -95,6 +100,7 @@ class LogInVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
                 print(error.localizedDescription)
             } else {
                 self.getFBUserData()
+                self.performSegue(withIdentifier: "RootSegue", sender: self)
             }
         }
     }
@@ -107,6 +113,7 @@ class LogInVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
                     print(error)
                 } else {
                     print(result!)
+                    print("hello")
                 }
             })
         }

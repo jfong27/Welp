@@ -6,6 +6,8 @@ target 'Welp' do
   use_frameworks!
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
+  pod 'Firebase/Database'
+  pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
   pod 'FBSDKLoginKit'
   # Pods for Welp
 
