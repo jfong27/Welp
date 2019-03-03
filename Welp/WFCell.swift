@@ -10,4 +10,7 @@ import UIKit
 
 class WFCell: UITableViewCell {
 
+    @IBOutlet weak var nameLabel: UILabel!
+
+    
 }

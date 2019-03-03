@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 import Firebase
 import FBSDKLoginKit
 
@@ -17,11 +18,22 @@ class LogInVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var pwdField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var fbButton: FBSDKLoginButton!
     @IBOutlet weak var loading: UIActivityIndicatorView!
+    @IBOutlet weak var loginLabel: UILabel!
+    
+    var dbRef : DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if Auth.auth().currentUser != nil {
+            self.performSegue(withIdentifier: "RootSegue", sender: self)
+        }
+                
+        self.dbRef = Database.database().reference()
+        
+        let fbLoginButton = FBSDKLoginButton()
+        fbLoginButton.delegate = self
         
         viewBox.layer.cornerRadius = 6;
         viewBox.layer.masksToBounds = true;
@@ -29,8 +41,18 @@ class LogInVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
         
         loginButton.alpha = 0.8
         loginButton.layer.cornerRadius = 15.0
+        viewBox.center = self.view.center
+        
+        loginLabel.center.x = self.view.center.x
+        loginLabel.center.y = self.view.center.y/2
         
         emailField.keyboardType = .emailAddress
+        
+        self.view.addSubview(fbLoginButton)
+        fbLoginButton.center = CGPoint.init(x: self.view.center.x,
+                                            y: self.view.center.y*2 - 200)
+        
+        
         
         self.navigationController?.isNavigationBarHidden = true
     }
@@ -39,6 +61,8 @@ class LogInVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
         emailField.text = ""
         pwdField.text = ""
         loading.isHidden = true
+        
+        
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -48,7 +72,9 @@ class LogInVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     }
     
     @IBAction func loginPress(_ sender: Any) {
+        loading.startAnimating()
         loading.isHidden = false
+        
         if let email = emailField.text, let password = pwdField.text {
             Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
                 if let error = error {
@@ -57,9 +83,9 @@ class LogInVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
                         NSLog("The \"OK\" alert occured.")
                     }))
                     self.present(alert, animated: true, completion: nil)
+                    self.loading.isHidden = true
                 } else {
-                    
-                    self.performSegue(withIdentifier: "RootSegue", sender: sender)
+                    self.navigationController?.popToRootViewController(animated: true)
                 }
             }
         }
@@ -68,13 +94,14 @@ class LogInVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         return
     }
-
+    
     func loginButton(_ fbButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        print("JKLASDLKJSAD")
+
         if let error = error {
             print(error.localizedDescription)
             return
         } else {
+            print(FBSDKAccessToken.current())
             let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
             
             Auth.auth().signInAndRetrieveData(with: credential) {(authResult, error) in
@@ -82,42 +109,29 @@ class LogInVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
                     print(error)
                 } else {
                     print("Signed in with fb")
+                    self.navigationController?.popToRootViewController(animated: true)
                 }
             }
         }
     }
-    
     
     @IBAction func signupPress(_ sender: Any) {
         self.performSegue(withIdentifier: "signupSegue", sender: sender)
     }
     
-    @IBAction func facebookButton(_ sender: Any) {
-        let loginManager = FBSDKLoginManager()
-        loginManager.logIn(withReadPermissions: ["email"], from: self) { (result, error) -> Void in
-            
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                self.getFBUserData()
-                self.performSegue(withIdentifier: "RootSegue", sender: self)
-            }
-        }
-    }
-    
-    func getFBUserData() {
-        if FBSDKAccessToken.current() != nil {
-            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, first_name, last_name, picture.type(large), email"]).start(completionHandler: {(connection, result, error) -> Void in
-                
-                if let error = error {
-                    print(error)
-                } else {
-                    print(result!)
-                    print("hello")
-                }
-            })
-        }
-    }
+//    func getFBUserData() {
+//        if FBSDKAccessToken.current() != nil {
+//            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, first_name, last_name, picture.type(large), email"]).start(completionHandler: {(connection, result, error) -> Void in
+//                
+//                if let error = error {
+//                    print(error)
+//                } else {
+//                    print(result!)
+//                    print("hello")
+//                }
+//            })
+//        }
+//    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == emailField {
@@ -126,12 +140,6 @@ class LogInVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
             textField.resignFirstResponder()
         }
         return false
-    }
-    
-    @IBAction func googleButton(_ sender: Any) {
-    }
-    
-    @IBAction func twitterButton(_ sender: Any) {
     }
     
 }

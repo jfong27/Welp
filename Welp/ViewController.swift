@@ -10,15 +10,18 @@ import UIKit
 import CoreLocation
 import MapKit
 
-class ViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate,
+                      UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
 
     let locationManager = CLLocationManager()
     
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var featuredIn: UILabel!
+    @IBOutlet weak var tableView: UITableView!
     
     lazy var geocoder = CLGeocoder()
+    var listFountains : WaterFountains?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,19 +33,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDe
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters 
             locationManager.startUpdatingLocation()
         }
+
+        tableView.dataSource = self
+        tableView.delegate = self
         
         searchBar.alpha = 1.0
         searchBar.backgroundColor = UIColor.clear
         searchBar.backgroundImage = UIImage()
         searchBar.barTintColor = UIColor.clear
-    }
-    
-    @IBAction func mapButton(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "mapSegue", sender: self)
-    }
-    
-    @IBAction func profileButton(_ sender: Any) {
-        self.performSegue(withIdentifier: "profSegue", sender: self)
+        
+        
+        //FOR TESTING
+        listFountains = WaterFountains(list: [WaterFountain(wfId: 5, latitude: 5.0, longitude: 5.0, rating: 5, name: "Test Fountain", inService: true)])
+        
+        organizeElements()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -66,20 +70,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDe
         } else {
             if let placemarks = placemarks, let placemark = placemarks.first {
                 if let city = placemark.locality {
-                    featuredIn.text = "Search for Water in San Luis Obispo"
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-                        self.featuredIn.text = "Search for Water in Paris"
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
-                        self.featuredIn.text = "Search for Water in Hong Kong"
-                    }
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 6) {
                         self.featuredIn.text = "Search for Water in " + city
                     }
                     
                 }
             } else {
-                featuredIn.text = "No Matching Addresses Found"
+                featuredIn.text = "Search for Water in Your City"
             }
         }
     }
@@ -91,5 +88,33 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDe
         
     }
     
+    private func organizeElements() {
+        self.view.sendSubviewToBack(tableView)
+        self.view.bringSubviewToFront(searchBar)
+    }
+    
+    
+    //Table view delegate/datasource protocol conformation funcs
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return (listFountains?.list.count) ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        print("Cell for row at")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WFCell", for: indexPath) as! WFCell
+        
+        let object = listFountains.unsafelyUnwrapped.list[indexPath.row]
+        
+        cell.nameLabel.text = object.name
+        
+        print(object.name)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Selected row " + String(indexPath.row))
+    }
+
 }
 

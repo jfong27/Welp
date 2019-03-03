@@ -26,6 +26,15 @@
 		96954E77220BF20B007555B4 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96954E76220BF20B007555B4 /* ProfileVC.swift */; };
 		96AF2F68222A48EA00AD3CF8 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF2F67222A48EA00AD3CF8 /* Review.swift */; };
 		96AF2F6A222A4C0200AD3CF8 /* RootProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF2F69222A4C0200AD3CF8 /* RootProfileVC.swift */; };
+		96AF2F6C222A7C5A00AD3CF8 /* NewReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF2F6B222A7C5A00AD3CF8 /* NewReviewVC.swift */; };
+		96AF2F6E222B2D4D00AD3CF8 /* HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF2F6D222B2D4D00AD3CF8 /* HideKeyboard.swift */; };
+		96AF2F71222B77F100AD3CF8 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF2F70222B77F100AD3CF8 /* RatingControl.swift */; };
+		96AF2F77222BA0A900AD3CF8 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96AF2F75222BA0A900AD3CF8 /* Montserrat-Regular.ttf */; };
+		96AF2F78222BA0A900AD3CF8 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96AF2F76222BA0A900AD3CF8 /* Montserrat-Bold.ttf */; };
+		96AF2F7C222BAD7E00AD3CF8 /* WaterFountains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF2F7B222BAD7E00AD3CF8 /* WaterFountains.swift */; };
+		96AF2F7E222BBC5200AD3CF8 /* ReviewDoneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF2F7D222BBC5200AD3CF8 /* ReviewDoneVC.swift */; };
+		96AF2F80222BC10000AD3CF8 /* CreateProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF2F7F222BC10000AD3CF8 /* CreateProfileVC.swift */; };
+		96AF2F84222BCFD600AD3CF8 /* tone.wav in Resources */ = {isa = PBXBuildFile; fileRef = 96AF2F83222BCFD600AD3CF8 /* tone.wav */; };
 		96FA53872216986200054526 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FA53862216986200054526 /* Helper.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +61,16 @@
 		96954E76220BF20B007555B4 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		96AF2F67222A48EA00AD3CF8 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		96AF2F69222A4C0200AD3CF8 /* RootProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootProfileVC.swift; sourceTree = "<group>"; };
+		96AF2F6B222A7C5A00AD3CF8 /* NewReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReviewVC.swift; sourceTree = "<group>"; };
+		96AF2F6D222B2D4D00AD3CF8 /* HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboard.swift; sourceTree = "<group>"; };
+		96AF2F6F222B457B00AD3CF8 /* Welp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Welp.entitlements; sourceTree = "<group>"; };
+		96AF2F70222B77F100AD3CF8 /* RatingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
+		96AF2F75222BA0A900AD3CF8 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		96AF2F76222BA0A900AD3CF8 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		96AF2F7B222BAD7E00AD3CF8 /* WaterFountains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterFountains.swift; sourceTree = "<group>"; };
+		96AF2F7D222BBC5200AD3CF8 /* ReviewDoneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDoneVC.swift; sourceTree = "<group>"; };
+		96AF2F7F222BC10000AD3CF8 /* CreateProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileVC.swift; sourceTree = "<group>"; };
+		96AF2F83222BCFD600AD3CF8 /* tone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tone.wav; sourceTree = "<group>"; };
 		96FA53862216986200054526 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		9B37B81297CBF4C35F3779F2 /* Pods-Welp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Welp.release.xcconfig"; path = "Target Support Files/Pods-Welp/Pods-Welp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,12 +127,14 @@
 		9644333821EF030B000D3C38 /* Welp */ = {
 			isa = PBXGroup;
 			children = (
+				96AF2F6F222B457B00AD3CF8 /* Welp.entitlements */,
 				967AC6C02213FD25009B2AC8 /* GoogleService-Info.plist */,
 				9644334021EF030B000D3C38 /* Assets.xcassets */,
 				9644333921EF030B000D3C38 /* AppDelegate.swift */,
 				9644333B21EF030B000D3C38 /* ViewController.swift */,
 				963B1EE522016DF500388F67 /* MapVC.swift */,
 				9644333D21EF030B000D3C38 /* Main.storyboard */,
+				96AF2F70222B77F100AD3CF8 /* RatingControl.swift */,
 				96954E76220BF20B007555B4 /* ProfileVC.swift */,
 				9644334221EF030B000D3C38 /* LaunchScreen.storyboard */,
 				9644334521EF030B000D3C38 /* Info.plist */,
@@ -121,14 +142,30 @@
 				963D15132214F1DC0000747D /* SignupVC.swift */,
 				963D15172215247E0000747D /* WFCell.swift */,
 				96FA53862216986200054526 /* Helper.swift */,
-				9649875C22228450005AE6DC /* SchoolMap.swift */,
 				96AF2F67222A48EA00AD3CF8 /* Review.swift */,
+				96AF2F7B222BAD7E00AD3CF8 /* WaterFountains.swift */,
 				963B1EDD22014EA300388F67 /* WaterFountain.swift */,
-				9649878222253079005AE6DC /* School.swift */,
-				9649878422271AD5005AE6DC /* SchoolDetail.swift */,
+				96AF2F7F222BC10000AD3CF8 /* CreateProfileVC.swift */,
 				96AF2F69222A4C0200AD3CF8 /* RootProfileVC.swift */,
+				96AF2F7D222BBC5200AD3CF8 /* ReviewDoneVC.swift */,
+				96AF2F6B222A7C5A00AD3CF8 /* NewReviewVC.swift */,
+				96AF2F6D222B2D4D00AD3CF8 /* HideKeyboard.swift */,
+				9649878222253079005AE6DC /* School.swift */,
+				9649875C22228450005AE6DC /* SchoolMap.swift */,
+				9649878422271AD5005AE6DC /* SchoolDetail.swift */,
+				96AF2F83222BCFD600AD3CF8 /* tone.wav */,
+				96AF2F74222BA09A00AD3CF8 /* Fonts */,
 			);
 			path = Welp;
+			sourceTree = "<group>";
+		};
+		96AF2F74222BA09A00AD3CF8 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				96AF2F76222BA0A900AD3CF8 /* Montserrat-Bold.ttf */,
+				96AF2F75222BA0A900AD3CF8 /* Montserrat-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,6 +180,7 @@
 				9644333321EF030B000D3C38 /* Frameworks */,
 				9644333421EF030B000D3C38 /* Resources */,
 				8CDAFFE10497863022649E81 /* [CP] Embed Pods Frameworks */,
+				E1154F3C94E8477444741140 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -166,6 +204,9 @@
 					9644333521EF030B000D3C38 = {
 						CreatedOnToolsVersion = 10.1;
 						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
 							com.apple.Maps.iOS = {
 								enabled = 1;
 							};
@@ -198,7 +239,10 @@
 			files = (
 				9644334421EF030B000D3C38 /* LaunchScreen.storyboard in Resources */,
 				967AC6C12213FD25009B2AC8 /* GoogleService-Info.plist in Resources */,
+				96AF2F78222BA0A900AD3CF8 /* Montserrat-Bold.ttf in Resources */,
 				9644334121EF030B000D3C38 /* Assets.xcassets in Resources */,
+				96AF2F77222BA0A900AD3CF8 /* Montserrat-Regular.ttf in Resources */,
+				96AF2F84222BCFD600AD3CF8 /* tone.wav in Resources */,
 				9644333F21EF030B000D3C38 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,6 +285,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -253,6 +298,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -260,6 +306,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Welp/Pods-Welp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E1154F3C94E8477444741140 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Welp/Pods-Welp-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Welp/Pods-Welp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -274,15 +342,21 @@
 				9649875D22228450005AE6DC /* SchoolMap.swift in Sources */,
 				963B1EDE22014EA300388F67 /* WaterFountain.swift in Sources */,
 				963D4B932214B8A600090566 /* LogInVC.swift in Sources */,
+				96AF2F6C222A7C5A00AD3CF8 /* NewReviewVC.swift in Sources */,
 				963D15182215247E0000747D /* WFCell.swift in Sources */,
 				96FA53872216986200054526 /* Helper.swift in Sources */,
+				96AF2F6E222B2D4D00AD3CF8 /* HideKeyboard.swift in Sources */,
+				96AF2F7C222BAD7E00AD3CF8 /* WaterFountains.swift in Sources */,
 				963B1EE622016DF500388F67 /* MapVC.swift in Sources */,
 				96AF2F68222A48EA00AD3CF8 /* Review.swift in Sources */,
 				9649878522271AD5005AE6DC /* SchoolDetail.swift in Sources */,
 				9649878322253079005AE6DC /* School.swift in Sources */,
+				96AF2F7E222BBC5200AD3CF8 /* ReviewDoneVC.swift in Sources */,
+				96AF2F80222BC10000AD3CF8 /* CreateProfileVC.swift in Sources */,
 				9644333C21EF030B000D3C38 /* ViewController.swift in Sources */,
 				96AF2F6A222A4C0200AD3CF8 /* RootProfileVC.swift in Sources */,
 				9644333A21EF030B000D3C38 /* AppDelegate.swift in Sources */,
+				96AF2F71222B77F100AD3CF8 /* RatingControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +503,7 @@
 			baseConfigurationReference = 8C260627F81F7D10B3B8E068 /* Pods-Welp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Welp/Welp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YHBK86M5WJ;
 				INFOPLIST_FILE = "$(SRCROOT)/Welp/Info.plist";
@@ -449,6 +524,7 @@
 			baseConfigurationReference = 9B37B81297CBF4C35F3779F2 /* Pods-Welp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Welp/Welp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YHBK86M5WJ;
 				INFOPLIST_FILE = "$(SRCROOT)/Welp/Info.plist";

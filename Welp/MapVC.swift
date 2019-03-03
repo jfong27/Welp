@@ -31,6 +31,8 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dbRef = Database.database().reference()
+        map.frame = self.view.bounds;
+        
         
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
@@ -44,9 +46,22 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         addButton.setTitleColor(.white, for: .normal)
         addButton = Helper.addShadowToButton(button: addButton)
         
+        centerElements()
+        
         coordLabel.isHidden = true
         marker.isHidden = true
         cancelButton.isHidden = true
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
+        coordLabel.isHidden = true
+        marker.isHidden = true
+        cancelButton.isHidden = true
+        
+        addButton.setAttributedTitle(NSAttributedString(string: "Add New Water Fountain"), for: .normal)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -93,6 +108,7 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
             
             Helper.vibrate()
         } else {
+            self.performSegue(withIdentifier: "NewReviewSegue", sender: self)
             uploadToFirebase(latitude: lat, longitude: lon)
         }
         
@@ -118,6 +134,31 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
              .child(String(id)).setValue(dict)
 
 
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "NewReviewSegue" {
+            let vc = segue.destination as! NewReviewVC
+            vc.latPassed = map.centerCoordinate.latitude
+            vc.lonPassed = map.centerCoordinate.longitude
+        }
+    }
+    
+    func centerElements() {
+        addButton.center.x = self.view.center.x
+        addButton.center.y = self.view.center.y/6 + 50
+        mapTypeSelector.center.x = self.view.center.x
+        mapTypeSelector.center.y = self.view.center.y/6
+        coordLabel.center.x = self.view.center.x
+        coordLabel.center.y = self.view.center.y/6 + 75
+        marker.center = self.view.center
+        cancelButton.center.y = coordLabel.center.y
+        cancelButton.center.x = coordLabel.center.x + 115
+        
+        mapTypeSelector.autoresizingMask = UIView.AutoresizingMask.flexibleWidth
+        
+        self.view.bringSubviewToFront(addButton)
+        self.view.bringSubviewToFront(mapTypeSelector)
     }
 
 }

@@ -10,91 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Welp/SignupVC.swift"
-            timestampString = "571815327.74913"
+            timestampString = "573298483.674656"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "textFieldDidEndEditing(_:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Welp/ProfileVC.swift"
-            timestampString = "573206284.2263269"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "13"
-            endingLineNumber = "13"
-            landmarkName = "ProfileVC"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Welp.ProfileVC.nameLabel.getter : weak Swift.Optional&lt;__C.UILabel&gt;"
-                  moduleName = "Welp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jasonfong/Desktop/Welp/Welp/ProfileVC.swift"
-                  timestampString = "573197138.64081"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "86">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Welp.ProfileVC.nameLabel.setter : weak Swift.Optional&lt;__C.UILabel&gt;"
-                  moduleName = "Welp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jasonfong/Desktop/Welp/Welp/ProfileVC.swift"
-                  timestampString = "573197138.6440949"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "106">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Welp.ProfileVC.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Welp.ProfileVC"
-                  moduleName = "Welp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jasonfong/Desktop/Welp/Welp/ProfileVC.swift"
-                  timestampString = "573197138.645961"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "57">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Welp.ProfileVC.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Welp.ProfileVC&gt;"
-                  moduleName = "Welp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jasonfong/Desktop/Welp/Welp/ProfileVC.swift"
-                  timestampString = "573197138.6475919"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "50">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
