@@ -45,7 +45,7 @@ class NewReviewVC : UIViewController, UITextViewDelegate, UITextFieldDelegate {
         reviewField.text = placeholderText
         reviewField.textColor = .lightGray
         
-        tempSlider.maximumTrackTintColor = .cyan
+        tempSlider.maximumTrackTintColor = .blue
         
     }
     
@@ -76,6 +76,7 @@ class NewReviewVC : UIViewController, UITextViewDelegate, UITextFieldDelegate {
 
         addNewFountainToFirebase(fountainId: fountainId, reviewId: reviewId)
         addNewReviewToFirebase(fountainId: fountainId, reviewId: reviewId)
+        linkReviewToUser()
         
         Helper.playSoundAndVibrate()
         self.performSegue(withIdentifier: "ReviewDoneSegue", sender: self)
@@ -92,8 +93,10 @@ class NewReviewVC : UIViewController, UITextViewDelegate, UITextFieldDelegate {
         dict.updateValue(lonPassed ?? 0, forKey: "longitude")
         dict.updateValue(Double(ratingControl.rating), forKey: "avgRating")
         dict.updateValue([reviewId], forKey: "reviews")
-        dict.updateValue("Description", forKey: "description")
+        dict.updateValue(descField.text ?? "Water", forKey: "description")
         dict.updateValue(Auth.auth().currentUser?.uid ?? 0, forKey: "user")
+        dict.updateValue(bottleSwitch.isOn, forKey: "hasBottleFiller")
+        dict.updateValue(serviceSwitch.isOn, forKey: "inService")
 
         fountainRef.child(fountainId).setValue(dict)
         self.geoFire?.setLocation(CLLocation(latitude: latPassed ?? 0,longitude:lonPassed ?? 0), forKey: fountainId)
@@ -106,7 +109,7 @@ class NewReviewVC : UIViewController, UITextViewDelegate, UITextFieldDelegate {
         //Randomly generated string fountainId is the primary key
         
         dict.updateValue(fountainId, forKey: "fountain")
-        dict.updateValue("Description", forKey: "description")
+        dict.updateValue(descField.text!, forKey: "description")
         dict.updateValue(reviewField.text, forKey: "review")
         dict.updateValue(serviceSwitch.isOn, forKey: "inService")
         dict.updateValue(bottleSwitch.isOn, forKey: "hasBottleFiller")
@@ -115,6 +118,16 @@ class NewReviewVC : UIViewController, UITextViewDelegate, UITextFieldDelegate {
         dict.updateValue(Auth.auth().currentUser?.uid ?? 0, forKey: "user")
         
         fountainRef.child(reviewId).setValue(dict)
+    }
+    
+    private func linkReviewToUser() {
+        let uid = Auth.auth().currentUser?.uid
+        print("User id: \(uid!)")
+        dbRef.child("users/\(uid!)/reviews").observeSingleEvent(of: .value, with: { snapshot in
+            let initialValue = snapshot.value
+            let value = (initialValue as! Int) + 1
+            self.dbRef.child("users/\(uid!)/reviews").setValue(value)
+        })
     }
     
     @IBAction func exitButton(_ sender: Any) {
@@ -133,11 +146,11 @@ class NewReviewVC : UIViewController, UITextViewDelegate, UITextFieldDelegate {
         descField.center.x = self.view.center.x
         tempSlider.center.x = self.view.center.x
         addButton.center.x = self.view.center.x
+        addButton.layer.cornerRadius = 15.0
         bottleSwitch.center.x = self.view.center.x * 1.5
         bottleLabel.center.x = self.view.center.x * 1.5
         serviceSwitch.center.x = self.view.center.x * 0.5
         serviceLabel.center.x = self.view.center.x * 0.5
         ratingControl.center.x = self.view.center.x
-        
     }
 }

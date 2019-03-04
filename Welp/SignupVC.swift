@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 class SignupVC: UIViewController {
     
@@ -16,8 +17,7 @@ class SignupVC: UIViewController {
     @IBOutlet weak var signupBox: UIView!
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var signupLabel: UILabel!
-    
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,6 +51,23 @@ class SignupVC: UIViewController {
         return false
     }
     
+    private func signup() {
+        if let email = emailField.text, let pwd = pwdField.text {
+            Auth.auth().createUser(withEmail: email, password: pwd) { (authResult, error) in
+                if let error = error {
+                    
+                    let alert = UIAlertController(title: "Uh oh", message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("Got it!", comment: "Default action"), style: .default, handler: { _ in
+                        NSLog("The \"OK\" alert occured.")
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                } else {
+                    self.performSegue(withIdentifier: "CreateProfileSegue", sender: self)
+                }
+            }
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CreateProfileSegue" {
             let vc = segue.destination as! CreateProfileVC
@@ -60,8 +77,7 @@ class SignupVC: UIViewController {
     }
     
     @IBAction func signupButton(_ sender: Any) {
-        self.performSegue(withIdentifier: "CreateProfileSegue", sender: self)
-        
+        signup()
     }
     
     @IBAction func exitButton(_ sender: Any) {

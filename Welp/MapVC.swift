@@ -10,6 +10,7 @@ import MapKit
 import UIKit
 import Firebase
 import FirebaseDatabase
+import GeoFire
 
 //NOTE: CLFloor can tell you what floor you are on.
 
@@ -18,6 +19,9 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     var didSetLocation = false
     var dbRef: DatabaseReference!
+    var geoFire : GeoFire?
+    var regionQuery : GFRegionQuery?
+    var fountainToPass : WaterFountain?
     var lat = 0.0
     var lon = 0.0
     
@@ -30,7 +34,8 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.dbRef = Database.database().reference()
+        dbRef = Database.database().reference().child("fountains")
+        geoFire = GeoFire(firebaseRef: Database.database().reference().child("GeoFire"))
         map.frame = self.view.bounds;
         
         
@@ -87,15 +92,44 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        print(String(mapView.centerCoordinate.latitude))
-        print(String(mapView.centerCoordinate.longitude))
-        print("A")
+
+        print("Region changed")
         lat = mapView.centerCoordinate.latitude
         lon = mapView.centerCoordinate.longitude
         let latStr = String(lat).prefix(8)
         let lonStr = String(lon).prefix(8)
         coordLabel.text =  "(" + latStr + ", " + lonStr + ")"
+        
+        updateRegionQuery()
     }
+    
+    private func updateRegionQuery() {
+        print("Update region query")
+        
+        if let oldQuery = regionQuery {
+            oldQuery.removeAllObservers()
+        }
+        
+        regionQuery = geoFire?.query(with: map.region)
+        regionQuery?.observe(.keyEntered, with: {(key, location) in
+            self.dbRef?.queryOrderedByKey().queryEqual(toValue: key).observe(.value, with: {snapshot in
+                if key.count == 10 {
+                let newFountain = WaterFountain(key: key, snapshot: snapshot)
+                print("Fountain by query")
+                print(newFountain.name)
+                self.addFountain(newFountain)
+                print("Adding fountain")
+                }
+            })
+        })
+    }
+    
+    private func addFountain(_ fountain : WaterFountain) {
+        DispatchQueue.main.async {
+            self.map.addAnnotation(fountain)
+        }
+    }
+    
     
     @IBAction func addReview(_ sender: Any) {
         if ((addButton.titleLabel?.text!)!) == "Add New Water Fountain" {
@@ -117,6 +151,25 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     @IBAction func mapTypeChange(_ sender: UISegmentedControl) {
         map.mapType = MKMapType(rawValue: UInt(sender.selectedSegmentIndex))!
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        if annotation is WaterFountain {
+            let annotationView = MKPinAnnotationView()
+        
+            annotationView.pinTintColor = .blue
+            annotationView.annotation = annotation
+            annotationView.canShowCallout = true
+            annotationView.animatesDrop = true
+            
+            let button = UIButton(type: UIButton.ButtonType.detailDisclosure) as UIButton
+            
+            annotationView.rightCalloutAccessoryView = button
+            return annotationView
+        }
+        
+        return nil
     }
 
     func uploadToFirebase(latitude: Double, longitude: Double) {
@@ -141,6 +194,19 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
             let vc = segue.destination as! NewReviewVC
             vc.latPassed = map.centerCoordinate.latitude
             vc.lonPassed = map.centerCoordinate.longitude
+        }
+        if segue.identifier == "FountainDetailSegue" {
+            let vc = segue.destination as! FountainDetailVC
+            vc.fountainPassed = self.fountainToPass
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        if control == view.rightCalloutAccessoryView{
+            self.fountainToPass = view.annotation as? WaterFountain
+            self.performSegue(withIdentifier: "SchoolDetailSegue", sender: self)
+            
         }
     }
     

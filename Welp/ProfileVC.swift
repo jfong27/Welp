@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 import FBSDKCoreKit
 import FBSDKLoginKit
 
@@ -19,28 +20,78 @@ class ProfileVC : UIViewController, FBSDKLoginButtonDelegate {
     @IBOutlet weak var numReviewsLabel: UILabel!
     @IBOutlet weak var profPic: UIImageView!
     
+    var signInMethodIsFB = false
     var handle : AuthStateDidChangeListenerHandle?
+    var dbRef: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameLabel.text = Auth.auth().currentUser?.displayName
-        homeLabel.text = Auth.auth().currentUser?.uid
+        let user = Auth.auth().currentUser
+        self.dbRef = Database.database().reference()
+        profPic.contentMode = .scaleToFill
+        arrangeElements()
         
-        let loginButton = FBSDKLoginButton()
-        loginButton.delegate = self
+        fetchUserData(user: user!)
         
-        loginButton.alpha = 0.8
-        loginButton.layer.cornerRadius = 15.0
+        let providerData = user?.providerData
+        for userInfo in providerData! {
+            if (userInfo.providerID == "facebook.com") {
+                setupFBButton()
+                signInMethodIsFB = true
+            }
+        }
+        if !signInMethodIsFB {
+            setupDefaultButton()
+        }
         
-        self.view.addSubview(loginButton)
-        loginButton.center = CGPoint.init(x: self.view.center.x,
+        nameLabel.text = user?.displayName
+        
+    }
+    
+    private func fetchUserData(user: User) {
+        
+        let userID = user.uid
+        dbRef.child("users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            let numReviews = value?["reviews"] as? Int ?? 0
+
+            self.numReviewsLabel.text = String(numReviews) + " Reviews"
+            // ...
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    private func setupFBButton() {
+        let logoutButton = FBSDKLoginButton()
+        logoutButton.delegate = self
+        
+        logoutButton.alpha = 0.8
+        logoutButton.layer.cornerRadius = 15.0
+        
+        self.view.addSubview(logoutButton)
+        logoutButton.center = CGPoint.init(x: self.view.center.x,
                                           y: self.view.center.y + 300)
-     
+        
+    }
+    
+    private func setupDefaultButton() {
+        let logoutButton = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 20))
+        
+        logoutButton.backgroundColor = .green
+        logoutButton.setTitle("Log Out", for: .normal)
+        logoutButton.center.x = self.view.center.x
+        logoutButton.center.y = self.view.center.y + 300
+        logoutButton.addTarget(self, action: #selector(self.logOut(sender:)), for: .touchUpInside)
+        
+        self.view.addSubview(logoutButton)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        fetchUserData(user: Auth.auth().currentUser!)
         if FBSDKAccessToken.current() == nil {
             return
         }
@@ -63,16 +114,13 @@ class ProfileVC : UIViewController, FBSDKLoginButtonDelegate {
             }
         }
         
-        handle = Auth.auth().addStateDidChangeListener { (auth, user) in
-        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-//        print(Auth.auth())
 //        Auth.auth().removeStateDidChangeListener(handle!)
     }
     
-    @IBAction func logOut(_ sender: Any) {
+    @objc func logOut(sender: UIButton) {
         try! Auth.auth().signOut()
         
         navigationController?.popToRootViewController(animated: true)
@@ -94,6 +142,11 @@ class ProfileVC : UIViewController, FBSDKLoginButtonDelegate {
         navigationController?.popToRootViewController(animated: true)
 
     }
-    
+ 
+    private func arrangeElements() {
+        nameLabel.adjustsFontSizeToFitWidth = true
+        homeLabel.adjustsFontSizeToFitWidth = true
+        numReviewsLabel.adjustsFontSizeToFitWidth = true
+    }
 }
 

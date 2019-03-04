@@ -108,30 +108,40 @@ class LogInVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
                 if let error = error {
                     print(error)
                 } else {
-                    print("Signed in with fb")
+                    if ((authResult?.additionalUserInfo?.isNewUser) ?? false) {
+                        self.addFBUserToDB()
+                    }
                     self.navigationController?.popToRootViewController(animated: true)
                 }
             }
         }
     }
     
+    private func addFBUserToDB() {
+        let user = Auth.auth().currentUser!
+        var dict = [String:Any]()
+        
+        let firstName = user.displayName?.split(separator: " ")[0]
+        let lastName = user.displayName?.split(separator: " ")[1]
+        let city = "city"
+        let state = "State"
+
+        dict.updateValue(firstName, forKey: "firstName")
+        dict.updateValue(lastName, forKey: "lastName")
+        dict.updateValue(city, forKey: "city")
+        dict.updateValue(state, forKey: "state")
+        dict.updateValue(user.email!, forKey: "email")
+        dict.updateValue(0, forKey: "reviews")
+
+        dbRef.child("users")
+            .child(user.uid)
+            .setValue(dict)
+
+    }
     @IBAction func signupPress(_ sender: Any) {
         self.performSegue(withIdentifier: "signupSegue", sender: sender)
     }
-    
-//    func getFBUserData() {
-//        if FBSDKAccessToken.current() != nil {
-//            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, first_name, last_name, picture.type(large), email"]).start(completionHandler: {(connection, result, error) -> Void in
-//                
-//                if let error = error {
-//                    print(error)
-//                } else {
-//                    print(result!)
-//                    print("hello")
-//                }
-//            })
-//        }
-//    }
+
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == emailField {

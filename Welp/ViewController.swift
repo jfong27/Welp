@@ -44,7 +44,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate,
         
         
         //FOR TESTING
-        listFountains = WaterFountains(list: [WaterFountain(wfId: 5, latitude: 5.0, longitude: 5.0, rating: 5, name: "Test Fountain", inService: true)])
+        listFountains = WaterFountains(list: [WaterFountain(fountainId: "ID HAHA", latitude: 5.0, longitude: 5.0, avgRating: Int(5.0), name: "Test Fountain", inService: true)])
         
         organizeElements()
     }
