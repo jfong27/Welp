@@ -50,7 +50,7 @@ class LogInVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
         
         self.view.addSubview(fbLoginButton)
         fbLoginButton.center = CGPoint.init(x: self.view.center.x,
-                                            y: self.view.center.y*2 - 200)
+                                            y: self.view.center.y * 1.65)
         
         
         
@@ -101,7 +101,9 @@ class LogInVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
             print(error.localizedDescription)
             return
         } else {
-            print(FBSDKAccessToken.current())
+            if FBSDKAccessToken.current() == nil {
+                return
+            }
             let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
             
             Auth.auth().signInAndRetrieveData(with: credential) {(authResult, error) in
@@ -121,8 +123,8 @@ class LogInVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
         let user = Auth.auth().currentUser!
         var dict = [String:Any]()
         
-        let firstName = user.displayName?.split(separator: " ")[0]
-        let lastName = user.displayName?.split(separator: " ")[1]
+        let firstName = String(user.displayName?.split(separator: " ")[0] ?? "")
+        let lastName = String(user.displayName?.split(separator: " ")[1] ?? "")
         let city = "city"
         let state = "State"
 
@@ -131,7 +133,6 @@ class LogInVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
         dict.updateValue(city, forKey: "city")
         dict.updateValue(state, forKey: "state")
         dict.updateValue(user.email!, forKey: "email")
-        dict.updateValue(0, forKey: "reviews")
 
         dbRef.child("users")
             .child(user.uid)

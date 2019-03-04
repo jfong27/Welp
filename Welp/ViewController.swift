@@ -42,6 +42,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate,
         searchBar.backgroundImage = UIImage()
         searchBar.barTintColor = UIColor.clear
         
+        featuredIn.adjustsFontSizeToFitWidth = true
         
         //FOR TESTING
         listFountains = WaterFountains(list: [WaterFountain(fountainId: "ID HAHA", latitude: 5.0, longitude: 5.0, avgRating: Int(5.0), name: "Test Fountain", inService: true)])

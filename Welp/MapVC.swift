@@ -92,8 +92,6 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-
-        print("Region changed")
         lat = mapView.centerCoordinate.latitude
         lon = mapView.centerCoordinate.longitude
         let latStr = String(lat).prefix(8)
@@ -104,7 +102,6 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     }
     
     private func updateRegionQuery() {
-        print("Update region query")
         
         if let oldQuery = regionQuery {
             oldQuery.removeAllObservers()
@@ -115,8 +112,6 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
             self.dbRef?.queryOrderedByKey().queryEqual(toValue: key).observe(.value, with: {snapshot in
                 if key.count == 10 {
                 let newFountain = WaterFountain(key: key, snapshot: snapshot)
-                print("Fountain by query")
-                print(newFountain.name)
                 self.addFountain(newFountain)
                 print("Adding fountain")
                 }
@@ -205,7 +200,7 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         
         if control == view.rightCalloutAccessoryView{
             self.fountainToPass = view.annotation as? WaterFountain
-            self.performSegue(withIdentifier: "SchoolDetailSegue", sender: self)
+            self.performSegue(withIdentifier: "FountainDetailSegue", sender: self)
             
         }
     }
@@ -216,7 +211,7 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         mapTypeSelector.center.x = self.view.center.x
         mapTypeSelector.center.y = self.view.center.y/6
         coordLabel.center.x = self.view.center.x
-        coordLabel.center.y = self.view.center.y/6 + 75
+        coordLabel.center.y = self.view.center.y/6 + 83
         marker.center = self.view.center
         cancelButton.center.y = coordLabel.center.y
         cancelButton.center.x = coordLabel.center.x + 115
@@ -225,6 +220,9 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         
         self.view.bringSubviewToFront(addButton)
         self.view.bringSubviewToFront(mapTypeSelector)
+        self.view.bringSubviewToFront(cancelButton)
+        self.view.bringSubviewToFront(marker)
+        self.view.bringSubviewToFront(coordLabel)
     }
 
 }

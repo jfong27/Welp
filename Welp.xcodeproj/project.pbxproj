@@ -23,6 +23,8 @@
 		9649878322253079005AE6DC /* School.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9649878222253079005AE6DC /* School.swift */; };
 		9649878522271AD5005AE6DC /* SchoolDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9649878422271AD5005AE6DC /* SchoolDetail.swift */; };
 		96784FE7222CC5CC00C60DA8 /* FountainDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96784FE6222CC5CC00C60DA8 /* FountainDetailVC.swift */; };
+		96784FE9222CE50100C60DA8 /* AddReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96784FE8222CE50100C60DA8 /* AddReviewVC.swift */; };
+		96784FEB222DB37400C60DA8 /* UIImageView+DownloadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96784FEA222DB37400C60DA8 /* UIImageView+DownloadImage.swift */; };
 		967AC6C12213FD25009B2AC8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 967AC6C02213FD25009B2AC8 /* GoogleService-Info.plist */; };
 		96954E77220BF20B007555B4 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96954E76220BF20B007555B4 /* ProfileVC.swift */; };
 		96AF2F68222A48EA00AD3CF8 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF2F67222A48EA00AD3CF8 /* Review.swift */; };
@@ -59,6 +61,8 @@
 		9649878222253079005AE6DC /* School.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = School.swift; sourceTree = "<group>"; };
 		9649878422271AD5005AE6DC /* SchoolDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolDetail.swift; sourceTree = "<group>"; };
 		96784FE6222CC5CC00C60DA8 /* FountainDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FountainDetailVC.swift; sourceTree = "<group>"; };
+		96784FE8222CE50100C60DA8 /* AddReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewVC.swift; sourceTree = "<group>"; };
+		96784FEA222DB37400C60DA8 /* UIImageView+DownloadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+DownloadImage.swift"; sourceTree = "<group>"; };
 		967AC6C02213FD25009B2AC8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		96954E76220BF20B007555B4 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		96AF2F67222A48EA00AD3CF8 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
@@ -158,6 +162,8 @@
 				9649878422271AD5005AE6DC /* SchoolDetail.swift */,
 				96AF2F83222BCFD600AD3CF8 /* tone.wav */,
 				96AF2F74222BA09A00AD3CF8 /* Fonts */,
+				96784FE8222CE50100C60DA8 /* AddReviewVC.swift */,
+				96784FEA222DB37400C60DA8 /* UIImageView+DownloadImage.swift */,
 			);
 			path = Welp;
 			sourceTree = "<group>";
@@ -349,7 +355,9 @@
 				963D15182215247E0000747D /* WFCell.swift in Sources */,
 				96FA53872216986200054526 /* Helper.swift in Sources */,
 				96784FE7222CC5CC00C60DA8 /* FountainDetailVC.swift in Sources */,
+				96784FEB222DB37400C60DA8 /* UIImageView+DownloadImage.swift in Sources */,
 				96AF2F6E222B2D4D00AD3CF8 /* HideKeyboard.swift in Sources */,
+				96784FE9222CE50100C60DA8 /* AddReviewVC.swift in Sources */,
 				96AF2F7C222BAD7E00AD3CF8 /* WaterFountains.swift in Sources */,
 				963B1EE622016DF500388F67 /* MapVC.swift in Sources */,
 				96AF2F68222A48EA00AD3CF8 /* Review.swift in Sources */,

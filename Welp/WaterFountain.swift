@@ -16,7 +16,6 @@ class WaterFountain : NSObject, MKAnnotation {
     var latitude : Double
     var longitude : Double
     var avgRating : Double
-    var reviews : [Review]
     var inService : Bool
     var name : String
     
@@ -47,7 +46,6 @@ class WaterFountain : NSObject, MKAnnotation {
         self.avgRating = Double(avgRating)
         self.name = name
         self.inService = inService
-        self.reviews = []
         ref = nil
         super.init()
     }
@@ -65,10 +63,9 @@ class WaterFountain : NSObject, MKAnnotation {
         
         latitude = snapvalues["latitude"] as? Double ?? 0.0
         longitude = snapvalues["longitude"] as? Double ?? 0.0
-        avgRating = 0.0
+        avgRating = snapvalues["avgRating"] as? Double ?? 0.0
         name = snapvalues["description"] as? String ?? "Water"
         inService = snapvalues["inService"] as? Bool ?? false
-        reviews = []
         
         
         ref = snapshot.ref

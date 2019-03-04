@@ -9,6 +9,8 @@
 import UIKit
 import AudioToolbox.AudioServices
 import AVFoundation
+import FirebaseStorage
+import FirebaseDatabase
 
 class Helper {
     
@@ -30,23 +32,9 @@ class Helper {
         AudioServicesPlaySystemSound(vibrate)
     }
     
-    static func playSoundAndVibrate() {
-//        DispatchQueue.global().async {
-//            SystenmSoundId(kSystemSoundID)
-//            let systemSoundID: SystemSoundID = 1309
-//
-//            let vibrate = SystemSoundID(kSystemSoundID_Vibrate)
-//
-//            // to play sound
-//            AudioServicesPlaySystemSound (systemSoundID)
-//            AudioServicesPlaySystemSound(vibrate)
-//        }
-        
-        
-    }
     static func randomAlphaNumericString(length: Int) -> String {
         let allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        let allowedCharsCount = UInt32(allowedChars.characters.count)
+        let allowedCharsCount = UInt32(allowedChars.count)
         var randomString = ""
         
         for _ in 0..<length {
@@ -58,4 +46,33 @@ class Helper {
         
         return randomString
     }
+    
+    static func uploadImageToFirebase(image: URL, imageFolder: String, uid: String) {
+        let storageRef = Storage.storage().reference()
+        let dbRef = Database.database().reference()
+        var imageUrl = ""
+        
+        // Create a reference to the file you want to upload
+        let imageRef = storageRef.child("\(imageFolder)/\(uid).jpg")
+        let userRef = dbRef.child("/users/\(uid)/profilePic")
+        
+        
+        // Upload the file to the path "images/rivers.jpg"
+        _ = imageRef.putFile(from: image, metadata: nil) { metadata, error in
+            guard metadata != nil else {
+                return
+            }
+
+            // You can also access to download URL after upload.
+            imageRef.downloadURL { (url, error) in
+                guard let downloadURL = url else {
+                    return
+                }
+                imageUrl = downloadURL.absoluteString
+                userRef.setValue(imageUrl)
+            }
+        }
+        
+    }
+    
 }

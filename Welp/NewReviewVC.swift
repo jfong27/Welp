@@ -37,16 +37,9 @@ class NewReviewVC : UIViewController, UITextViewDelegate, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboard()
-        self.centerElements()
+        self.setupElements()
         self.dbRef = Database.database().reference()
         self.geoFire = GeoFire(firebaseRef: Database.database().reference().child("GeoFire"))
-        
-        reviewField.delegate = self
-        reviewField.text = placeholderText
-        reviewField.textColor = .lightGray
-        
-        tempSlider.maximumTrackTintColor = .blue
-        
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -73,12 +66,12 @@ class NewReviewVC : UIViewController, UITextViewDelegate, UITextFieldDelegate {
 
         let fountainId = Helper.randomAlphaNumericString(length: 10)
         let reviewId = Helper.randomAlphaNumericString(length: 10)
-
-        addNewFountainToFirebase(fountainId: fountainId, reviewId: reviewId)
-        addNewReviewToFirebase(fountainId: fountainId, reviewId: reviewId)
-        linkReviewToUser()
+        let uid = Auth.auth().currentUser?.uid ?? ""
         
-        Helper.playSoundAndVibrate()
+        addNewFountainToFirebase(fountainId: fountainId, reviewId: reviewId)
+        addNewReviewToFirebase(fountainId: fountainId, reviewId: reviewId, uid: uid)
+        linkReviewToUser(reviewId: reviewId, uid: uid)
+        
         self.performSegue(withIdentifier: "ReviewDoneSegue", sender: self)
     }
     
@@ -86,30 +79,21 @@ class NewReviewVC : UIViewController, UITextViewDelegate, UITextFieldDelegate {
         var dict = [String:Any]()
         let fountainRef = self.dbRef.child("fountains")
 
-        //Randomly generated string fountainId is the primary key
-
-        dict.updateValue(fountainId, forKey: "fountainId")
-        dict.updateValue(latPassed ?? 0, forKey: "latitude")
-        dict.updateValue(lonPassed ?? 0, forKey: "longitude")
         dict.updateValue(Double(ratingControl.rating), forKey: "avgRating")
-        dict.updateValue([reviewId], forKey: "reviews")
-        dict.updateValue(descField.text ?? "Water", forKey: "description")
-        dict.updateValue(Auth.auth().currentUser?.uid ?? 0, forKey: "user")
-        dict.updateValue(bottleSwitch.isOn, forKey: "hasBottleFiller")
         dict.updateValue(serviceSwitch.isOn, forKey: "inService")
 
         fountainRef.child(fountainId).setValue(dict)
+        fountainRef.child(fountainId).child("reviews").child(reviewId).setValue(true)
         self.geoFire?.setLocation(CLLocation(latitude: latPassed ?? 0,longitude:lonPassed ?? 0), forKey: fountainId)
     }
     
-    private func addNewReviewToFirebase(fountainId: String, reviewId: String) {
+    private func addNewReviewToFirebase(fountainId: String, reviewId: String, uid: String) {
         var dict = [String:Any]()
         let fountainRef = self.dbRef.child("reviews")
         
         //Randomly generated string fountainId is the primary key
         
         dict.updateValue(fountainId, forKey: "fountain")
-        dict.updateValue(descField.text!, forKey: "description")
         dict.updateValue(reviewField.text, forKey: "review")
         dict.updateValue(serviceSwitch.isOn, forKey: "inService")
         dict.updateValue(bottleSwitch.isOn, forKey: "hasBottleFiller")
@@ -120,14 +104,16 @@ class NewReviewVC : UIViewController, UITextViewDelegate, UITextFieldDelegate {
         fountainRef.child(reviewId).setValue(dict)
     }
     
-    private func linkReviewToUser() {
-        let uid = Auth.auth().currentUser?.uid
-        print("User id: \(uid!)")
-        dbRef.child("users/\(uid!)/reviews").observeSingleEvent(of: .value, with: { snapshot in
+    private func linkReviewToUser(reviewId: String, uid: String) {
+
+        dbRef.child("users/\(uid)/reviews").observeSingleEvent(of: .value, with: { snapshot in
             let initialValue = snapshot.value
             let value = (initialValue as! Int) + 1
-            self.dbRef.child("users/\(uid!)/reviews").setValue(value)
+            self.dbRef.child("users/\(uid)/reviews").setValue(value)
         })
+        
+        dbRef.child("users/\(uid)/reviewIds/\(reviewId)").setValue(true)
+        
     }
     
     @IBAction func exitButton(_ sender: Any) {
@@ -141,7 +127,7 @@ class NewReviewVC : UIViewController, UITextViewDelegate, UITextFieldDelegate {
         return false
     }
     
-    func centerElements() {
+    func setupElements() {
         reviewField.center.x = self.view.center.x
         descField.center.x = self.view.center.x
         tempSlider.center.x = self.view.center.x
@@ -152,5 +138,9 @@ class NewReviewVC : UIViewController, UITextViewDelegate, UITextFieldDelegate {
         serviceSwitch.center.x = self.view.center.x * 0.5
         serviceLabel.center.x = self.view.center.x * 0.5
         ratingControl.center.x = self.view.center.x
+        reviewField.delegate = self
+        reviewField.text = placeholderText
+        reviewField.textColor = .lightGray
+        tempSlider.maximumTrackTintColor = .blue
     }
 }

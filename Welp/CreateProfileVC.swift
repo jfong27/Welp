@@ -52,7 +52,6 @@ class CreateProfileVC : UIViewController {
         dict.updateValue(city, forKey: "city")
         dict.updateValue(state, forKey: "state")
         dict.updateValue(user.email!, forKey: "email")
-        dict.updateValue(0, forKey: "reviews")
         
         dbRef.child("users")
             .child(user.uid)
@@ -87,7 +86,7 @@ class CreateProfileVC : UIViewController {
             navigationController?.popToRootViewController(animated: true)
         }
     }
-        
+    
     private func playSound() {
         guard let url = Bundle.main.url(forResource: "tone", withExtension: "wav") else { return }
         
