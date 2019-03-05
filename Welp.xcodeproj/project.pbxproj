@@ -65,6 +65,7 @@
 		96784FEA222DB37400C60DA8 /* UIImageView+DownloadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+DownloadImage.swift"; sourceTree = "<group>"; };
 		967AC6C02213FD25009B2AC8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		96954E76220BF20B007555B4 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		969C77F7222E3DFC00B1053F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		96AF2F67222A48EA00AD3CF8 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		96AF2F69222A4C0200AD3CF8 /* RootProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootProfileVC.swift; sourceTree = "<group>"; };
 		96AF2F6B222A7C5A00AD3CF8 /* NewReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReviewVC.swift; sourceTree = "<group>"; };
@@ -133,6 +134,7 @@
 		9644333821EF030B000D3C38 /* Welp */ = {
 			isa = PBXGroup;
 			children = (
+				969C77F7222E3DFC00B1053F /* README.md */,
 				96AF2F6F222B457B00AD3CF8 /* Welp.entitlements */,
 				967AC6C02213FD25009B2AC8 /* GoogleService-Info.plist */,
 				9644334021EF030B000D3C38 /* Assets.xcassets */,
@@ -161,9 +163,9 @@
 				9649875C22228450005AE6DC /* SchoolMap.swift */,
 				9649878422271AD5005AE6DC /* SchoolDetail.swift */,
 				96AF2F83222BCFD600AD3CF8 /* tone.wav */,
-				96AF2F74222BA09A00AD3CF8 /* Fonts */,
 				96784FE8222CE50100C60DA8 /* AddReviewVC.swift */,
 				96784FEA222DB37400C60DA8 /* UIImageView+DownloadImage.swift */,
+				96AF2F74222BA09A00AD3CF8 /* Fonts */,
 			);
 			path = Welp;
 			sourceTree = "<group>";

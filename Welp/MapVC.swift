@@ -33,6 +33,7 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     @IBOutlet weak var coordLabel: UILabel!
     
     override func viewDidLoad() {
+        print("VIEW DID LOAD")
         super.viewDidLoad()
         dbRef = Database.database().reference().child("fountains")
         geoFire = GeoFire(firebaseRef: Database.database().reference().child("GeoFire"))
@@ -61,6 +62,7 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print("VIEW WILL APPEAR")
         self.navigationController?.isNavigationBarHidden = true
         coordLabel.isHidden = true
         marker.isHidden = true
@@ -75,7 +77,7 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         if !didSetLocation {
             let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
             let startRegion = MKCoordinateRegion(center: locValue, span: span)
-        
+            
             map.setRegion(startRegion, animated: true)
             didSetLocation = true
         }
@@ -107,13 +109,15 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
             oldQuery.removeAllObservers()
         }
         
+        map.removeAnnotations(map.annotations)
+        
         regionQuery = geoFire?.query(with: map.region)
         regionQuery?.observe(.keyEntered, with: {(key, location) in
             self.dbRef?.queryOrderedByKey().queryEqual(toValue: key).observe(.value, with: {snapshot in
+                
                 if key.count == 10 {
-                let newFountain = WaterFountain(key: key, snapshot: snapshot)
-                self.addFountain(newFountain)
-                print("Adding fountain")
+                    let newFountain = WaterFountain(key: key, snapshot: snapshot)
+                    self.addFountain(newFountain)
                 }
             })
         })
@@ -138,7 +142,6 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
             Helper.vibrate()
         } else {
             self.performSegue(withIdentifier: "NewReviewSegue", sender: self)
-            uploadToFirebase(latitude: lat, longitude: lon)
         }
         
         
@@ -167,22 +170,6 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         return nil
     }
 
-    func uploadToFirebase(latitude: Double, longitude: Double) {
-
-        var dict = [String:Any]()
-
-        let id = 0
-
-        dict.updateValue(id, forKey: "locationId")
-        dict.updateValue(latitude, forKey: "latitude")
-        dict.updateValue(longitude, forKey: "longitude")
-
-        dbRef.child("locations")
-             .child("waterFountains")
-             .child(String(id)).setValue(dict)
-
-
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "NewReviewSegue" {

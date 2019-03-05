@@ -9,6 +9,8 @@
 import UIKit
 import CoreLocation
 import MapKit
+import GeoFire
+import Firebase
 
 class ViewController: UIViewController, CLLocationManagerDelegate,
                       UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
@@ -21,12 +23,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate,
     @IBOutlet weak var tableView: UITableView!
     
     lazy var geocoder = CLGeocoder()
-    var listFountains : WaterFountains?
+    var listFountains : [WaterFountain] = []
+    var geoFire : GeoFire?
+    var dbRef : DatabaseReference!
+    var fountainToPass : WaterFountain?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.locationManager.requestWhenInUseAuthorization()
+        navigationController?.navigationBar.isHidden = true
+        dbRef = Database.database().reference().child("fountains")
+        geoFire = GeoFire(firebaseRef: Database.database().reference().child("GeoFire"))
         
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
@@ -44,10 +52,22 @@ class ViewController: UIViewController, CLLocationManagerDelegate,
         
         featuredIn.adjustsFontSizeToFitWidth = true
         
-        //FOR TESTING
-        listFountains = WaterFountains(list: [WaterFountain(fountainId: "ID HAHA", latitude: 5.0, longitude: 5.0, avgRating: Int(5.0), name: "Test Fountain", inService: true)])
-        
+        populateFountainsList()
         organizeElements()
+    }
+    
+    private func populateFountainsList() {
+        
+        let regionQuery = geoFire?.query(at: locationManager.location!, withRadius: 2.0)
+        regionQuery?.observe(.keyEntered, with: {(key, location) in
+            self.dbRef?.queryOrderedByKey().queryEqual(toValue: key).observe(.value, with: {snapshot in
+                
+                let newFountain = WaterFountain(key: key, snapshot: snapshot)
+                self.listFountains.append(newFountain)
+                self.tableView.reloadData()
+            })
+        })
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -57,7 +77,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate,
         
         geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
             self.processResponse(withPlacemarks: placemarks, error: error)
-            
         }
         
     }
@@ -66,8 +85,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate,
         // Update View
         if let error = error {
             print("Unable to Reverse Geocode Location (\(error))")
-            featuredIn.text = "Unable to Find Address for Location"
-            
         } else {
             if let placemarks = placemarks, let placemark = placemarks.first {
                 if let city = placemark.locality {
@@ -84,7 +101,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate,
     
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("HI")
         searchBar.keyboardAppearance = .dark
         
     }
@@ -94,27 +110,37 @@ class ViewController: UIViewController, CLLocationManagerDelegate,
         self.view.bringSubviewToFront(searchBar)
     }
     
-    
     //Table view delegate/datasource protocol conformation funcs
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (listFountains?.list.count) ?? 0
+
+        return listFountains.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        print("Cell for row at")
         let cell = tableView.dequeueReusableCell(withIdentifier: "WFCell", for: indexPath) as! WFCell
         
-        let object = listFountains.unsafelyUnwrapped.list[indexPath.row]
         
-        cell.nameLabel.text = object.name
+        let fountain = listFountains[indexPath.row]
         
-        print(object.name)
+        
+        cell.nameLabel.text = fountain.name
+        
         return cell
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "FountainDetailSegue" {
+            let vc = segue.destination as! FountainDetailVC
+            vc.fountainPassed = fountainToPass
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Selected row " + String(indexPath.row))
+        let indexPath = tableView.indexPathForSelectedRow
+        fountainToPass = listFountains[(indexPath?.row)!]
+        
+        self.performSegue(withIdentifier: "FountainDetailSegue", sender: self)
     }
 
 }

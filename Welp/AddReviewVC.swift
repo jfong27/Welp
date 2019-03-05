@@ -54,23 +54,26 @@ class AddReviewVC : UIViewController, UITextViewDelegate {
     private func updateFountainInFirebase(fountainId: String, reviewId: String) {
         let fountainRef = self.dbRef.child("fountains")
         
-        var total = Double(ratingControl.rating)
-        var numReviews = 1.0
+        print("RATING CONTROL")
+        print(ratingControl.rating)
+        var ratingTotal = 0.0
+        var tempTotal = 0.0
+        var numReviews = 0.0
         
         dbRef.child("reviews").queryOrdered(byChild: "fountain").queryEqual(toValue: fountainId).observeSingleEvent(of: .value, with: { snapshot in
             
             let fetchedList = snapshot.children.allObjects as? [DataSnapshot]
             for snap in fetchedList! {
                 let snapDict = snap.value as! [String: AnyObject]
-                print("OK")
-                print(snapDict["rating"]!)
-                print("UH HUH")
-                
-                total = total + Double((snapDict["rating"] as! Int))
+                ratingTotal = ratingTotal + Double((snapDict["rating"] as! Int))
+                tempTotal = tempTotal + Double((snapDict["temperature"] as! Double))
                 numReviews = numReviews + 1
             }
-            let newAvgRating = total/numReviews
+            
+            let newAvgRating = Double(ratingTotal)/Double(numReviews)
+            let newAvgTemp = Double(tempTotal)/Double(numReviews)
             fountainRef.child(fountainId).child("avgRating").setValue(newAvgRating)
+            fountainRef.child(fountainId).child("avgTemp").setValue(newAvgTemp)
         })
         
         fountainRef.child(fountainId).child("inService").setValue(serviceSwitch.isOn)

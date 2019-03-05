@@ -79,9 +79,14 @@ class NewReviewVC : UIViewController, UITextViewDelegate, UITextFieldDelegate {
         var dict = [String:Any]()
         let fountainRef = self.dbRef.child("fountains")
 
+        dict.updateValue(descField.text!, forKey: "name")
         dict.updateValue(Double(ratingControl.rating), forKey: "avgRating")
+        dict.updateValue(Double(tempSlider.value), forKey: "avgTemp")
         dict.updateValue(serviceSwitch.isOn, forKey: "inService")
+        dict.updateValue(latPassed!, forKey: "latitude")
+        dict.updateValue(lonPassed!, forKey: "longitude")
 
+        
         fountainRef.child(fountainId).setValue(dict)
         fountainRef.child(fountainId).child("reviews").child(reviewId).setValue(true)
         self.geoFire?.setLocation(CLLocation(latitude: latPassed ?? 0,longitude:lonPassed ?? 0), forKey: fountainId)

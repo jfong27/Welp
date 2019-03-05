@@ -118,20 +118,6 @@ class ProfileVC : UIViewController, FBSDKLoginButtonDelegate,
         if let userId = FBSDKAccessToken.current().userID {
             let link = "https://graph.facebook.com/\(userId)/picture?type=large"
             profPic.downloaded(from: link)
-//            DispatchQueue.global(qos: .userInitiated).async {
-//                let url = URL(string: link)
-//                let responseData = try? Data(contentsOf: url!)
-//                let downloadedImage = UIImage(data: responseData!)
-//                
-//                DispatchQueue.main.async {
-//                    self.profPic.image = downloadedImage
-//                    self.profPic.layer.masksToBounds = false
-//                    self.profPic.contentMode = .scaleAspectFit
-//                    self.profPic.layer.borderColor = UIColor.black.cgColor
-//                    self.profPic.layer.cornerRadius = self.profPic.frame.height/3
-//                    self.profPic.clipsToBounds = true
-//                }
-//            }
         }
         
     }
@@ -168,10 +154,9 @@ class ProfileVC : UIViewController, FBSDKLoginButtonDelegate,
         homeLabel.adjustsFontSizeToFitWidth = true
         numReviewsLabel.adjustsFontSizeToFitWidth = true
         profPic.contentMode = .scaleAspectFit
+        profPic.layer.cornerRadius = profPic.frame.height/2
+        profPic.frame = CGRect(x: profPic.frame.origin.x, y: profPic.frame.origin.y, width: profPic.frame.size.width, height: profPic.frame.size.width)
     }
-    
-    
-    
     
     
     @IBAction func addPictureBtnAction(sender: UIButton) {
@@ -236,8 +221,6 @@ class ProfileVC : UIViewController, FBSDKLoginButtonDelegate,
         var imageUrl: URL
         
         if let possibleImage = info[.imageURL] as? URL {
-            print("IMAGE URL")
-            print(possibleImage.absoluteString)
             imageUrl = possibleImage
         } else {
             return
