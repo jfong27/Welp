@@ -116,6 +116,7 @@
 		9644332D21EF030B000D3C38 = {
 			isa = PBXGroup;
 			children = (
+				969C77F7222E3DFC00B1053F /* README.md */,
 				9644333821EF030B000D3C38 /* Welp */,
 				9644333721EF030B000D3C38 /* Products */,
 				17B050B67D776D9E9ED04A83 /* Pods */,
@@ -134,12 +135,12 @@
 		9644333821EF030B000D3C38 /* Welp */ = {
 			isa = PBXGroup;
 			children = (
-				969C77F7222E3DFC00B1053F /* README.md */,
 				96AF2F6F222B457B00AD3CF8 /* Welp.entitlements */,
 				967AC6C02213FD25009B2AC8 /* GoogleService-Info.plist */,
 				9644334021EF030B000D3C38 /* Assets.xcassets */,
 				9644333921EF030B000D3C38 /* AppDelegate.swift */,
 				9644333B21EF030B000D3C38 /* ViewController.swift */,
+				9649875C22228450005AE6DC /* SchoolMap.swift */,
 				963B1EE522016DF500388F67 /* MapVC.swift */,
 				9644333D21EF030B000D3C38 /* Main.storyboard */,
 				96AF2F70222B77F100AD3CF8 /* RatingControl.swift */,
@@ -160,7 +161,6 @@
 				96AF2F6B222A7C5A00AD3CF8 /* NewReviewVC.swift */,
 				96AF2F6D222B2D4D00AD3CF8 /* HideKeyboard.swift */,
 				9649878222253079005AE6DC /* School.swift */,
-				9649875C22228450005AE6DC /* SchoolMap.swift */,
 				9649878422271AD5005AE6DC /* SchoolDetail.swift */,
 				96AF2F83222BCFD600AD3CF8 /* tone.wav */,
 				96784FE8222CE50100C60DA8 /* AddReviewVC.swift */,

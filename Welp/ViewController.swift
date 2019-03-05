@@ -56,9 +56,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate,
         organizeElements()
     }
     
+    
     private func populateFountainsList() {
-        
-        let regionQuery = geoFire?.query(at: locationManager.location!, withRadius: 2.0)
+
+        let regionQuery = geoFire?.query(at: locationManager.location ?? CLLocation(latitude: 50, longitude: 90), withRadius: 2.0)
         regionQuery?.observe(.keyEntered, with: {(key, location) in
             self.dbRef?.queryOrderedByKey().queryEqual(toValue: key).observe(.value, with: {snapshot in
                 
