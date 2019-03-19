@@ -13,6 +13,9 @@ class FountainDetailVC : UIViewController {
     
     @IBOutlet weak var descLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
+    @IBOutlet weak var serviceLabel: UILabel!
+    @IBOutlet weak var fillerLabel: UILabel!
+    @IBOutlet weak var serviceImage: UIImageView!
     
     var fountainPassed : WaterFountain?
     
@@ -22,17 +25,12 @@ class FountainDetailVC : UIViewController {
         descLabel.text = "\(fountainPassed!.name) (\(ratingStr) / 5)"
         
         let avgTemp = fountainPassed!.avgTemp
-        if avgTemp >= 81 {
-            tempLabel.text = "Users say the water here is usually burning hot!"
-        } else if avgTemp >= 61 {
-            tempLabel.text = "Users say the water here is usually warm"
-        } else if avgTemp >= 41 {
-            tempLabel.text = "Users say the water here is usually room temperature"
-        } else if avgTemp >= 21 {
-            tempLabel.text = "Users say the water here is usually cool"
-        } else {
-            tempLabel.text = "Users say the water here is usually ice cold"
-        }        
+        tempLabel.text = Helper.tempDescription(temp: avgTemp)
+        
+        if !((fountainPassed?.inService) ?? true) {
+            serviceLabel.text = "Out of Service"
+            serviceImage.image = UIImage(named: "redX")
+        }
         
         arrangeElements()
     }

@@ -178,7 +178,7 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
             vc.lonPassed = map.centerCoordinate.longitude
         }
         if segue.identifier == "FountainDetailSegue" {
-            let vc = segue.destination as! FountainDetailVC
+            let vc = segue.destination as! FountainDetail
             vc.fountainPassed = self.fountainToPass
         }
     }

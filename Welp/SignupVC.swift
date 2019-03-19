@@ -20,7 +20,7 @@ class SignupVC: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.hideKeyboard()
         
         signupBox.layer.cornerRadius = 6;
         signupBox.layer.masksToBounds = true;

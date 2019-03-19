@@ -30,6 +30,7 @@ class CreateProfileVC : UIViewController {
         super.viewDidLoad()
         self.dbRef = Database.database().reference()
         
+        self.hideKeyboard()
         arrangeElements()
     }
     
@@ -52,6 +53,7 @@ class CreateProfileVC : UIViewController {
         dict.updateValue(city, forKey: "city")
         dict.updateValue(state, forKey: "state")
         dict.updateValue(user.email!, forKey: "email")
+        dict.updateValue(0, forKey: "reviews")
         
         dbRef.child("users")
             .child(user.uid)
@@ -103,6 +105,19 @@ class CreateProfileVC : UIViewController {
         } catch let error {
             print(error.localizedDescription)
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == firstNameField {
+            lastNameField.becomeFirstResponder()
+        } else if textField == lastNameField {
+            hometownField.becomeFirstResponder()
+        } else if textField == hometownField {
+            stateField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        return false
     }
     
     private func arrangeElements() {

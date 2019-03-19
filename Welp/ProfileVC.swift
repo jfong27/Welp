@@ -42,6 +42,10 @@ class ProfileVC : UIViewController, FBSDKLoginButtonDelegate,
                 setupFBButton()
                 addPictureBtn.isHidden = true
                 signInMethodIsFB = true
+                if let userId = FBSDKAccessToken.current().userID {
+                    let link = "https://graph.facebook.com/\(userId)/picture?type=large"
+                    profPic.downloaded(from: link)
+                }
             }
         }
         if !signInMethodIsFB {
@@ -53,7 +57,7 @@ class ProfileVC : UIViewController, FBSDKLoginButtonDelegate,
     }
     
     private func fetchUserData(user: User) {
-        
+
         let userID = user.uid
         dbRef.child("users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
@@ -62,6 +66,8 @@ class ProfileVC : UIViewController, FBSDKLoginButtonDelegate,
             let state = value?["state"] as? String ?? ""
             if let picUrl = value?["profilePic"] as? String {
                 self.profPic.downloaded(from: picUrl)
+                self.profPic.clipsToBounds = true
+                self.profPic.contentMode = .scaleAspectFill
             }
             self.homeLabel.text = hometown + ", " + state
         }) { (error) in
@@ -71,7 +77,7 @@ class ProfileVC : UIViewController, FBSDKLoginButtonDelegate,
         dbRef.child("reviews").queryOrdered(byChild: "user").queryEqual(toValue: userID).observeSingleEvent(of: .value, with: { snapshot in
             var numReviews = 0
             let fetchedList = snapshot.children.allObjects
-            numReviews = fetchedList.count + 1
+            numReviews = fetchedList.count
             
             if numReviews == 1 {
                 self.numReviewsLabel.text = String(numReviews) + " Review"
@@ -110,20 +116,11 @@ class ProfileVC : UIViewController, FBSDKLoginButtonDelegate,
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         fetchUserData(user: Auth.auth().currentUser!)
-        if FBSDKAccessToken.current() == nil {
-            return
-        }
-        if let userId = FBSDKAccessToken.current().userID {
-            let link = "https://graph.facebook.com/\(userId)/picture?type=large"
-            profPic.downloaded(from: link)
-        }
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-//        Auth.auth().removeStateDidChangeListener(handle!)
+        super.viewWillDisappear(animated)
     }
     
     @objc func logOut(sender: UIButton) {
@@ -153,9 +150,9 @@ class ProfileVC : UIViewController, FBSDKLoginButtonDelegate,
         nameLabel.adjustsFontSizeToFitWidth = true
         homeLabel.adjustsFontSizeToFitWidth = true
         numReviewsLabel.adjustsFontSizeToFitWidth = true
-        profPic.contentMode = .scaleAspectFit
-        profPic.layer.cornerRadius = profPic.frame.height/2
-        profPic.frame = CGRect(x: profPic.frame.origin.x, y: profPic.frame.origin.y, width: profPic.frame.size.width, height: profPic.frame.size.width)
+        profPic.clipsToBounds = true
+        profPic.contentMode = .scaleAspectFill
+        profPic.layer.cornerRadius = profPic.frame.size.height/2
     }
     
     
@@ -172,7 +169,7 @@ class ProfileVC : UIViewController, FBSDKLoginButtonDelegate,
                 self.imagePicker.sourceType = .camera
                 self.present()
                 
-            }else{
+            } else {
                 self.present(self.showAlert(Title: "Title", Message: "Camera is not available on this Device or accesibility has been revoked!"), animated: true, completion: nil)
                 
             }
@@ -212,9 +209,7 @@ class ProfileVC : UIViewController, FBSDKLoginButtonDelegate,
     }
     
     func present(){
-        
         self.present(imagePicker, animated: true, completion: nil)
-        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -228,8 +223,11 @@ class ProfileVC : UIViewController, FBSDKLoginButtonDelegate,
         
         let user = Auth.auth().currentUser
         let uid = user?.uid ?? ""
-        Helper.uploadImageToFirebase(image: imageUrl, imageFolder: "profilePics", uid: uid)
-        fetchUserData(user: user!)
+        Helper.uploadProfPicToFirebase(image: imageUrl, key: uid)
+        
+        profPic.image = info[.originalImage] as? UIImage
+        profPic.layer.cornerRadius = profPic.frame.size.height/2
+        addPictureBtn.isEnabled = true
         
         dismiss(animated: true)
     }

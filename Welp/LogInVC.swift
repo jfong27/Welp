@@ -25,6 +25,7 @@ class LogInVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboard()
         
         if Auth.auth().currentUser != nil {
             self.performSegue(withIdentifier: "RootSegue", sender: self)
@@ -133,7 +134,8 @@ class LogInVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
         dict.updateValue(city, forKey: "city")
         dict.updateValue(state, forKey: "state")
         dict.updateValue(user.email!, forKey: "email")
-
+        dict.updateValue(0, forKey: "reviews")
+        
         dbRef.child("users")
             .child(user.uid)
             .setValue(dict)

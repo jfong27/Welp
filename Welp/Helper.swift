@@ -47,17 +47,16 @@ class Helper {
         return randomString
     }
     
-    static func uploadImageToFirebase(image: URL, imageFolder: String, uid: String) {
+    static func uploadProfPicToFirebase(image: URL, key: String) {
         let storageRef = Storage.storage().reference()
         let dbRef = Database.database().reference()
         var imageUrl = ""
         
         // Create a reference to the file you want to upload
-        let imageRef = storageRef.child("\(imageFolder)/\(uid).jpg")
-        let userRef = dbRef.child("/users/\(uid)/profilePic")
+        let imageRef = storageRef.child("profilePics/\(key).jpg")
+        let userRef = dbRef.child("/users/\(key)/profilePic")
         
         
-        // Upload the file to the path "images/rivers.jpg"
         _ = imageRef.putFile(from: image, metadata: nil) { metadata, error in
             guard metadata != nil else {
                 return
@@ -75,4 +74,46 @@ class Helper {
         
     }
     
+    static func tempDescription(temp: Double) -> String{
+        if temp >= 81 {
+            return "Welpers say the water here is usually burning hot!"
+        } else if temp >= 61 {
+            return "Welpers say the water here is usually warm"
+        } else if temp >= 41 {
+            return "Welpers say the water here is usually room temperature"
+        } else if temp >= 21 {
+            return "Welpers say the water here is usually cool"
+        } else {
+            return "Welpers say the water here is usually ice cold"
+        }
+    }
+    
+    static func uploadReviewImgToFirebase(image: URL, key: String) {
+        let storageRef = Storage.storage().reference()
+        let dbRef = Database.database().reference()
+        var imageUrl = ""
+        
+        // Create a reference to the file you want to upload
+        print(key.last!)
+        print(key.dropLast())
+        let imageRef = storageRef.child("reviewPics/\(key).jpg")
+        let reviewRef = dbRef.child("/reviews/\(key.dropLast())/images")
+        
+        
+        _ = imageRef.putFile(from: image, metadata: nil) { metadata, error in
+            guard metadata != nil else {
+                return
+            }
+            
+            imageRef.downloadURL { (url, error) in
+                guard let downloadURL = url else {
+                    return
+                }
+                
+                imageUrl = downloadURL.absoluteString
+                reviewRef.child("\(key.last!)").setValue(imageUrl)
+            }
+        }
+        
+    }
 }

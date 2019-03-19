@@ -33,7 +33,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate,
         // Do any additional setup after loading the view, typically from a nib.
         self.locationManager.requestWhenInUseAuthorization()
         navigationController?.navigationBar.isHidden = true
-        dbRef = Database.database().reference().child("fountains")
+        dbRef = Database.database().reference()
         geoFire = GeoFire(firebaseRef: Database.database().reference().child("GeoFire"))
         
         if CLLocationManager.locationServicesEnabled() {
@@ -49,26 +49,35 @@ class ViewController: UIViewController, CLLocationManagerDelegate,
         searchBar.backgroundColor = UIColor.clear
         searchBar.backgroundImage = UIImage()
         searchBar.barTintColor = UIColor.clear
+        searchBar.delegate = self
         
         featuredIn.adjustsFontSizeToFitWidth = true
         
-        populateFountainsList()
         organizeElements()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        populateFountainsList()
     }
     
     
     private func populateFountainsList() {
-
         let regionQuery = geoFire?.query(at: locationManager.location ?? CLLocation(latitude: 50, longitude: 90), withRadius: 2.0)
         regionQuery?.observe(.keyEntered, with: {(key, location) in
-            self.dbRef?.queryOrderedByKey().queryEqual(toValue: key).observe(.value, with: {snapshot in
+            self.dbRef.child("fountains").queryOrderedByKey().queryEqual(toValue: key).observe(.value, with: {snapshot in
                 
                 let newFountain = WaterFountain(key: key, snapshot: snapshot)
+                // The reason for adding and removing is to remove the old version
+                // of the fountain and replace it with one with updated avg rating,
+                // in service, etc.
+                if self.listFountains.contains(newFountain) {
+                    self.listFountains.remove(at: self.listFountains.firstIndex(of: newFountain)!)
+                }
                 self.listFountains.append(newFountain)
                 self.tableView.reloadData()
             })
         })
-        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -113,7 +122,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate,
     
     //Table view delegate/datasource protocol conformation funcs
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
         return listFountains.count
     }
     
@@ -121,10 +129,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate,
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "WFCell", for: indexPath) as! WFCell
         
-        
         let fountain = listFountains[indexPath.row]
         
-        
+        let reviewId = fountain.reviews[0]
+        dbRef.child("reviews/\(reviewId)/images").observeSingleEvent(of: .value, with:
+            { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                let imageLink = value?["A"] as? String ?? ""
+                cell.thumbImage.downloaded(from: imageLink)
+                cell.thumbImage.clipsToBounds = true
+                cell.thumbImage.contentMode = .scaleAspectFill
+                cell.thumbImage.layer.cornerRadius = cell.thumbImage.frame.size.height/2
+        })
         cell.nameLabel.text = fountain.name
         
         return cell
@@ -132,7 +148,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate,
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "FountainDetailSegue" {
-            let vc = segue.destination as! FountainDetailVC
+            let vc = segue.destination as! FountainDetail
+            vc.fountainPassed = fountainToPass
+        } else if segue.identifier == "ReviewTableSegue" {
+            let vc = segue.destination as! FountainDetail
             vc.fountainPassed = fountainToPass
         }
     }
@@ -141,8 +160,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate,
         let indexPath = tableView.indexPathForSelectedRow
         fountainToPass = listFountains[(indexPath?.row)!]
         
-        self.performSegue(withIdentifier: "FountainDetailSegue", sender: self)
+//        self.performSegue(withIdentifier: "FountainDetailSegue", sender: self)
+        self.performSegue(withIdentifier: "ReviewTableSegue", sender: self)
     }
 
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        print(searchBar.text!)
+        print("B")
+    }
+    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        print(searchBar.text!)
+        print("A")
+        return true
+    }
+    
 }
 

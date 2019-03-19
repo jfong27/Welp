@@ -30,6 +30,8 @@ class RatingControl: UIStackView {
             updateButtonSelectionStates()
         }
     }
+    
+    var canChange = true
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -80,7 +82,9 @@ class RatingControl: UIStackView {
     }
     
     @objc func ratingButtonTapped(button: UIButton) {
-        
+        if !canChange {
+            return
+        }
         guard let index = ratingButtons.index(of: button) else {
             fatalError("The button, \(button), is not in the ratingButtons array: \(ratingButtons)")
         }

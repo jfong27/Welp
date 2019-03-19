@@ -18,8 +18,10 @@ class WaterFountain : NSObject, MKAnnotation {
     var avgRating : Double
     var avgTemp : Double
     var inService : Bool
+    var hasFiller : Bool
     var name : String
-    
+    var reviews : [String]
+
     var coordinate : CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
@@ -32,7 +34,6 @@ class WaterFountain : NSObject, MKAnnotation {
         if inService {
             return "In Service"
         } else {
-            print("Hello")
             return "Out of Service"
         }
     }
@@ -40,7 +41,8 @@ class WaterFountain : NSObject, MKAnnotation {
     let ref : DatabaseReference?
     
     init(fountainId: String, latitude: Double, longitude: Double,
-         avgRating: Double, avgTemp: Double, name: String, inService: Bool) {
+         avgRating: Double, avgTemp: Double, name: String, inService: Bool,
+         hasFiller: Bool, reviews : [String]) {
         self.fountainId = fountainId
         self.latitude = latitude
         self.longitude = longitude
@@ -48,6 +50,8 @@ class WaterFountain : NSObject, MKAnnotation {
         self.avgTemp = Double(avgTemp)
         self.name = name
         self.inService = inService
+        self.reviews = reviews
+        self.hasFiller = hasFiller
         ref = nil
         super.init()
     }
@@ -66,7 +70,10 @@ class WaterFountain : NSObject, MKAnnotation {
         avgTemp = snapvalues["avgTemp"] as? Double ?? 0.0
         name = snapvalues["name"] as? String ?? "Water"
         inService = snapvalues["inService"] as? Bool ?? false
+        hasFiller = snapvalues["hasBottleFiller"] as? Bool ?? false
+        let reviewChild = snapvalues["reviews"] as? [String : Bool] ?? [:]
         
+        reviews = Array(reviewChild.keys)
         
         ref = snapshot.ref
         super.init()
@@ -79,6 +86,16 @@ class WaterFountain : NSObject, MKAnnotation {
             "latitude": latitude,
             "longitude": longitude
         ]
+    }
+    
+    override func isEqual(_ object: Any?) -> Bool {
+        if let f = object as? WaterFountain {
+            if f.fountainId == self.fountainId {
+                return true
+            }
+        }
+        
+        return false
     }
     
     

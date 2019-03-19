@@ -98,7 +98,7 @@ class SchoolMap: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate 
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
         if control == view.rightCalloutAccessoryView{
-            self.schoolToPass = view.annotation as! School
+            self.schoolToPass = view.annotation as? School
             self.performSegue(withIdentifier: "SchoolDetailSegue", sender: self)
             
         }
@@ -107,7 +107,7 @@ class SchoolMap: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SchoolDetailSegue" {
-            var vc = segue.destination as! SchoolDetail
+            let vc = segue.destination as! SchoolDetail
             
             vc.schoolPassed = self.schoolToPass
         }
