@@ -26,9 +26,17 @@ extension UIImageView {
             }.resume()
     }
     
-    func downloaded(from link: String, contentMode mode: UIView.ContentMode = .scaleAspectFit) {  // for swift 4.2 syntax just use ===> mode: UIView.ContentMode
+    func downloaded(from link: String, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
+        print("DOWNLOADING LINK")
+        print(link)
         guard let url = URL(string: link) else { return }
         downloaded(from: url, contentMode: mode)
+    }
+    
+    func makeCircle() {
+        self.clipsToBounds = true
+        self.contentMode = .scaleAspectFill
+        self.layer.cornerRadius = self.frame.size.height/2
     }
     
 }

@@ -141,6 +141,7 @@ class LogInVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
             .setValue(dict)
 
     }
+    
     @IBAction func signupPress(_ sender: Any) {
         self.performSegue(withIdentifier: "signupSegue", sender: sender)
     }

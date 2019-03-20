@@ -58,7 +58,6 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         marker.isHidden = true
         cancelButton.isHidden = true
         
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,7 +66,6 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         coordLabel.isHidden = true
         marker.isHidden = true
         cancelButton.isHidden = true
-        
         addButton.setAttributedTitle(NSAttributedString(string: "Add New Water Fountain"), for: .normal)
     }
     
@@ -114,11 +112,8 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         regionQuery = geoFire?.query(with: map.region)
         regionQuery?.observe(.keyEntered, with: {(key, location) in
             self.dbRef?.queryOrderedByKey().queryEqual(toValue: key).observe(.value, with: {snapshot in
-                
-                if key.count == 10 {
                     let newFountain = WaterFountain(key: key, snapshot: snapshot)
                     self.addFountain(newFountain)
-                }
             })
         })
     }
@@ -176,8 +171,7 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
             let vc = segue.destination as! NewReviewVC
             vc.latPassed = map.centerCoordinate.latitude
             vc.lonPassed = map.centerCoordinate.longitude
-        }
-        if segue.identifier == "FountainDetailSegue" {
+        } else if segue.identifier == "FountainDetailSegue" {
             let vc = segue.destination as! FountainDetail
             vc.fountainPassed = self.fountainToPass
         }

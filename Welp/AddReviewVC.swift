@@ -65,9 +65,6 @@ class AddReviewVC : UIViewController, UITextViewDelegate,
         var tempTotal = 0.0
         var numReviews = 0.0
         
-        print("FOUNTAIN")
-        print(fountainId)
-        
         dbRef.child("reviews").queryOrdered(byChild: "fountain").queryEqual(toValue: fountainId).observeSingleEvent(of: .value, with: { snapshot in
             
             let fetchedList = snapshot.children.allObjects as? [DataSnapshot]
@@ -93,9 +90,7 @@ class AddReviewVC : UIViewController, UITextViewDelegate,
         var dict = [String:Any]()
         let reviewRef = self.dbRef.child("reviews")
         
-        print("REVIEW")
-        //Randomly generated string fountainId is the primary key
-        
+        //Randomly generated string fountainId is the primary key        
         dict.updateValue(fountainId, forKey: "fountain")
         dict.updateValue(reviewField.text, forKey: "review")
         dict.updateValue(serviceSwitch.isOn, forKey: "inService")
@@ -106,7 +101,7 @@ class AddReviewVC : UIViewController, UITextViewDelegate,
         
         
         
-        reviewRef.child(reviewId).setValue(dict)
+        reviewRef.child(reviewId).updateChildValues(dict)
     }
     
     private func linkReviewToUser(reviewId: String, uid: String) {

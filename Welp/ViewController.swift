@@ -13,14 +13,15 @@ import GeoFire
 import Firebase
 
 class ViewController: UIViewController, CLLocationManagerDelegate,
-                      UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
+                      UITableViewDelegate, UITableViewDataSource,
+                      UITextFieldDelegate {
 
     let locationManager = CLLocationManager()
     
     @IBOutlet weak var image: UIImageView!
-    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var featuredIn: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchField: UITextField!
     
     lazy var geocoder = CLGeocoder()
     var listFountains : [WaterFountain] = []
@@ -32,6 +33,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate,
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.locationManager.requestWhenInUseAuthorization()
+        self.hideKeyboard()
+        searchField.keyboardType = .numbersAndPunctuation
         navigationController?.navigationBar.isHidden = true
         dbRef = Database.database().reference()
         geoFire = GeoFire(firebaseRef: Database.database().reference().child("GeoFire"))
@@ -45,11 +48,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate,
         tableView.dataSource = self
         tableView.delegate = self
         
-        searchBar.alpha = 1.0
-        searchBar.backgroundColor = UIColor.clear
-        searchBar.backgroundImage = UIImage()
-        searchBar.barTintColor = UIColor.clear
-        searchBar.delegate = self
+//        searchBar.alpha = 1.0
+//        searchBar.backgroundColor = UIColor.clear
+//        searchBar.backgroundImage = UIImage()
+//        searchBar.barTintColor = UIColor.clear
+//        searchBar.delegate = self
         
         featuredIn.adjustsFontSizeToFitWidth = true
         
@@ -58,6 +61,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate,
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
         populateFountainsList()
     }
     
@@ -110,14 +114,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate,
     }
     
 
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.keyboardAppearance = .dark
-        
-    }
     
     private func organizeElements() {
         self.view.sendSubviewToBack(tableView)
-        self.view.bringSubviewToFront(searchBar)
+//        self.view.bringSubviewToFront(searchBar)
     }
     
     //Table view delegate/datasource protocol conformation funcs
@@ -141,7 +141,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate,
                 cell.thumbImage.contentMode = .scaleAspectFill
                 cell.thumbImage.layer.cornerRadius = cell.thumbImage.frame.size.height/2
         })
-        cell.nameLabel.text = fountain.name
+        cell.nameLabel.text = "\(fountain.name)  ( \(fountain.avgRating) / 5 )"
         
         return cell
     }
@@ -160,20 +160,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate,
         let indexPath = tableView.indexPathForSelectedRow
         fountainToPass = listFountains[(indexPath?.row)!]
         
-//        self.performSegue(withIdentifier: "FountainDetailSegue", sender: self)
         self.performSegue(withIdentifier: "ReviewTableSegue", sender: self)
     }
 
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        print(searchBar.text!)
-        print("B")
-    }
-    
-    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
-        print(searchBar.text!)
-        print("A")
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print(textField.text)
         return true
     }
     
+//
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        searchBar.keyboardAppearance = .dark
+//
+//    }
+    
+
 }
 

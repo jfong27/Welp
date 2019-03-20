@@ -17,20 +17,17 @@
 		9644333A21EF030B000D3C38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9644333921EF030B000D3C38 /* AppDelegate.swift */; };
 		9644333C21EF030B000D3C38 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9644333B21EF030B000D3C38 /* ViewController.swift */; };
 		9644333F21EF030B000D3C38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9644333D21EF030B000D3C38 /* Main.storyboard */; };
-		9644334121EF030B000D3C38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9644334021EF030B000D3C38 /* Assets.xcassets */; };
 		9644334421EF030B000D3C38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9644334221EF030B000D3C38 /* LaunchScreen.storyboard */; };
-		9649875D22228450005AE6DC /* SchoolMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9649875C22228450005AE6DC /* SchoolMap.swift */; };
-		9649878322253079005AE6DC /* School.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9649878222253079005AE6DC /* School.swift */; };
-		9649878522271AD5005AE6DC /* SchoolDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9649878422271AD5005AE6DC /* SchoolDetail.swift */; };
-		96784FE7222CC5CC00C60DA8 /* FountainDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96784FE6222CC5CC00C60DA8 /* FountainDetailVC.swift */; };
 		96784FE9222CE50100C60DA8 /* AddReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96784FE8222CE50100C60DA8 /* AddReviewVC.swift */; };
 		96784FEB222DB37400C60DA8 /* UIImageView+DownloadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96784FEA222DB37400C60DA8 /* UIImageView+DownloadImage.swift */; };
 		967AC6C12213FD25009B2AC8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 967AC6C02213FD25009B2AC8 /* GoogleService-Info.plist */; };
+		967F874F2241E5A00035FDCC /* CompassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967F874E2241E5A00035FDCC /* CompassVC.swift */; };
+		967F87532241E92B0035FDCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 967F87522241E9280035FDCC /* Assets.xcassets */; };
 		96954E77220BF20B007555B4 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96954E76220BF20B007555B4 /* ProfileVC.swift */; };
 		96AF2F68222A48EA00AD3CF8 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF2F67222A48EA00AD3CF8 /* Review.swift */; };
 		96AF2F6A222A4C0200AD3CF8 /* RootProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF2F69222A4C0200AD3CF8 /* RootProfileVC.swift */; };
 		96AF2F6C222A7C5A00AD3CF8 /* NewReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF2F6B222A7C5A00AD3CF8 /* NewReviewVC.swift */; };
-		96AF2F6E222B2D4D00AD3CF8 /* HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF2F6D222B2D4D00AD3CF8 /* HideKeyboard.swift */; };
+		96AF2F6E222B2D4D00AD3CF8 /* UIViewController+HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF2F6D222B2D4D00AD3CF8 /* UIViewController+HideKeyboard.swift */; };
 		96AF2F71222B77F100AD3CF8 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF2F70222B77F100AD3CF8 /* RatingControl.swift */; };
 		96AF2F77222BA0A900AD3CF8 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96AF2F75222BA0A900AD3CF8 /* Montserrat-Regular.ttf */; };
 		96AF2F78222BA0A900AD3CF8 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96AF2F76222BA0A900AD3CF8 /* Montserrat-Bold.ttf */; };
@@ -38,6 +35,9 @@
 		96AF2F7E222BBC5200AD3CF8 /* ReviewDoneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF2F7D222BBC5200AD3CF8 /* ReviewDoneVC.swift */; };
 		96AF2F80222BC10000AD3CF8 /* CreateProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF2F7F222BC10000AD3CF8 /* CreateProfileVC.swift */; };
 		96AF2F84222BCFD600AD3CF8 /* tone.wav in Resources */ = {isa = PBXBuildFile; fileRef = 96AF2F83222BCFD600AD3CF8 /* tone.wav */; };
+		96C8FA39223CDF1600B74536 /* FountainDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8FA38223CDF1600B74536 /* FountainDetailCell.swift */; };
+		96C8FA3B223CDF6800B74536 /* FountainDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8FA3A223CDF6800B74536 /* FountainDetail.swift */; };
+		96C8FA3D223CEB1E00B74536 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8FA3C223CEB1E00B74536 /* ReviewCell.swift */; };
 		96FA53872216986200054526 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FA53862216986200054526 /* Helper.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,22 +54,19 @@
 		9644333921EF030B000D3C38 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9644333B21EF030B000D3C38 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9644333E21EF030B000D3C38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		9644334021EF030B000D3C38 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9644334321EF030B000D3C38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9644334521EF030B000D3C38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9649875C22228450005AE6DC /* SchoolMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolMap.swift; sourceTree = "<group>"; };
-		9649878222253079005AE6DC /* School.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = School.swift; sourceTree = "<group>"; };
-		9649878422271AD5005AE6DC /* SchoolDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolDetail.swift; sourceTree = "<group>"; };
-		96784FE6222CC5CC00C60DA8 /* FountainDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FountainDetailVC.swift; sourceTree = "<group>"; };
 		96784FE8222CE50100C60DA8 /* AddReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewVC.swift; sourceTree = "<group>"; };
 		96784FEA222DB37400C60DA8 /* UIImageView+DownloadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+DownloadImage.swift"; sourceTree = "<group>"; };
 		967AC6C02213FD25009B2AC8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		967F874E2241E5A00035FDCC /* CompassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassVC.swift; sourceTree = "<group>"; };
+		967F87522241E9280035FDCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		96954E76220BF20B007555B4 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		969C77F7222E3DFC00B1053F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		96AF2F67222A48EA00AD3CF8 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		96AF2F69222A4C0200AD3CF8 /* RootProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootProfileVC.swift; sourceTree = "<group>"; };
 		96AF2F6B222A7C5A00AD3CF8 /* NewReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReviewVC.swift; sourceTree = "<group>"; };
-		96AF2F6D222B2D4D00AD3CF8 /* HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboard.swift; sourceTree = "<group>"; };
+		96AF2F6D222B2D4D00AD3CF8 /* UIViewController+HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+HideKeyboard.swift"; sourceTree = "<group>"; };
 		96AF2F6F222B457B00AD3CF8 /* Welp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Welp.entitlements; sourceTree = "<group>"; };
 		96AF2F70222B77F100AD3CF8 /* RatingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		96AF2F75222BA0A900AD3CF8 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
@@ -78,6 +75,9 @@
 		96AF2F7D222BBC5200AD3CF8 /* ReviewDoneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDoneVC.swift; sourceTree = "<group>"; };
 		96AF2F7F222BC10000AD3CF8 /* CreateProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileVC.swift; sourceTree = "<group>"; };
 		96AF2F83222BCFD600AD3CF8 /* tone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tone.wav; sourceTree = "<group>"; };
+		96C8FA38223CDF1600B74536 /* FountainDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FountainDetailCell.swift; sourceTree = "<group>"; };
+		96C8FA3A223CDF6800B74536 /* FountainDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FountainDetail.swift; sourceTree = "<group>"; };
+		96C8FA3C223CEB1E00B74536 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
 		96FA53862216986200054526 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		9B37B81297CBF4C35F3779F2 /* Pods-Welp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Welp.release.xcconfig"; path = "Target Support Files/Pods-Welp/Pods-Welp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -135,12 +135,11 @@
 		9644333821EF030B000D3C38 /* Welp */ = {
 			isa = PBXGroup;
 			children = (
+				967F87522241E9280035FDCC /* Assets.xcassets */,
 				96AF2F6F222B457B00AD3CF8 /* Welp.entitlements */,
 				967AC6C02213FD25009B2AC8 /* GoogleService-Info.plist */,
-				9644334021EF030B000D3C38 /* Assets.xcassets */,
 				9644333921EF030B000D3C38 /* AppDelegate.swift */,
 				9644333B21EF030B000D3C38 /* ViewController.swift */,
-				9649875C22228450005AE6DC /* SchoolMap.swift */,
 				963B1EE522016DF500388F67 /* MapVC.swift */,
 				9644333D21EF030B000D3C38 /* Main.storyboard */,
 				96AF2F70222B77F100AD3CF8 /* RatingControl.swift */,
@@ -154,17 +153,18 @@
 				96AF2F67222A48EA00AD3CF8 /* Review.swift */,
 				96AF2F7B222BAD7E00AD3CF8 /* WaterFountains.swift */,
 				963B1EDD22014EA300388F67 /* WaterFountain.swift */,
-				96784FE6222CC5CC00C60DA8 /* FountainDetailVC.swift */,
 				96AF2F7F222BC10000AD3CF8 /* CreateProfileVC.swift */,
 				96AF2F69222A4C0200AD3CF8 /* RootProfileVC.swift */,
 				96AF2F7D222BBC5200AD3CF8 /* ReviewDoneVC.swift */,
 				96AF2F6B222A7C5A00AD3CF8 /* NewReviewVC.swift */,
-				96AF2F6D222B2D4D00AD3CF8 /* HideKeyboard.swift */,
-				9649878222253079005AE6DC /* School.swift */,
-				9649878422271AD5005AE6DC /* SchoolDetail.swift */,
+				96AF2F6D222B2D4D00AD3CF8 /* UIViewController+HideKeyboard.swift */,
 				96AF2F83222BCFD600AD3CF8 /* tone.wav */,
 				96784FE8222CE50100C60DA8 /* AddReviewVC.swift */,
 				96784FEA222DB37400C60DA8 /* UIImageView+DownloadImage.swift */,
+				96C8FA3C223CEB1E00B74536 /* ReviewCell.swift */,
+				96C8FA38223CDF1600B74536 /* FountainDetailCell.swift */,
+				96C8FA3A223CDF6800B74536 /* FountainDetail.swift */,
+				967F874E2241E5A00035FDCC /* CompassVC.swift */,
 				96AF2F74222BA09A00AD3CF8 /* Fonts */,
 			);
 			path = Welp;
@@ -251,8 +251,8 @@
 				9644334421EF030B000D3C38 /* LaunchScreen.storyboard in Resources */,
 				967AC6C12213FD25009B2AC8 /* GoogleService-Info.plist in Resources */,
 				96AF2F78222BA0A900AD3CF8 /* Montserrat-Bold.ttf in Resources */,
-				9644334121EF030B000D3C38 /* Assets.xcassets in Resources */,
 				96AF2F77222BA0A900AD3CF8 /* Montserrat-Regular.ttf in Resources */,
+				967F87532241E92B0035FDCC /* Assets.xcassets in Resources */,
 				96AF2F84222BCFD600AD3CF8 /* tone.wav in Resources */,
 				9644333F21EF030B000D3C38 /* Main.storyboard in Resources */,
 			);
@@ -350,26 +350,26 @@
 			files = (
 				96954E77220BF20B007555B4 /* ProfileVC.swift in Sources */,
 				963D15142214F1DC0000747D /* SignupVC.swift in Sources */,
-				9649875D22228450005AE6DC /* SchoolMap.swift in Sources */,
+				967F874F2241E5A00035FDCC /* CompassVC.swift in Sources */,
 				963B1EDE22014EA300388F67 /* WaterFountain.swift in Sources */,
 				963D4B932214B8A600090566 /* LogInVC.swift in Sources */,
 				96AF2F6C222A7C5A00AD3CF8 /* NewReviewVC.swift in Sources */,
 				963D15182215247E0000747D /* WFCell.swift in Sources */,
 				96FA53872216986200054526 /* Helper.swift in Sources */,
-				96784FE7222CC5CC00C60DA8 /* FountainDetailVC.swift in Sources */,
 				96784FEB222DB37400C60DA8 /* UIImageView+DownloadImage.swift in Sources */,
-				96AF2F6E222B2D4D00AD3CF8 /* HideKeyboard.swift in Sources */,
+				96AF2F6E222B2D4D00AD3CF8 /* UIViewController+HideKeyboard.swift in Sources */,
 				96784FE9222CE50100C60DA8 /* AddReviewVC.swift in Sources */,
+				96C8FA39223CDF1600B74536 /* FountainDetailCell.swift in Sources */,
 				96AF2F7C222BAD7E00AD3CF8 /* WaterFountains.swift in Sources */,
 				963B1EE622016DF500388F67 /* MapVC.swift in Sources */,
 				96AF2F68222A48EA00AD3CF8 /* Review.swift in Sources */,
-				9649878522271AD5005AE6DC /* SchoolDetail.swift in Sources */,
-				9649878322253079005AE6DC /* School.swift in Sources */,
 				96AF2F7E222BBC5200AD3CF8 /* ReviewDoneVC.swift in Sources */,
 				96AF2F80222BC10000AD3CF8 /* CreateProfileVC.swift in Sources */,
 				9644333C21EF030B000D3C38 /* ViewController.swift in Sources */,
 				96AF2F6A222A4C0200AD3CF8 /* RootProfileVC.swift in Sources */,
 				9644333A21EF030B000D3C38 /* AppDelegate.swift in Sources */,
+				96C8FA3D223CEB1E00B74536 /* ReviewCell.swift in Sources */,
+				96C8FA3B223CDF6800B74536 /* FountainDetail.swift in Sources */,
 				96AF2F71222B77F100AD3CF8 /* RatingControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

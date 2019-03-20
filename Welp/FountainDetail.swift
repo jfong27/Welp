@@ -35,7 +35,7 @@ class FountainDetail : UIViewController, UITableViewDelegate, UITableViewDataSou
             let avgTemp = fountainPassed?.avgTemp ?? 50
             cell.descLabel.lineBreakMode = .byWordWrapping
             cell.descLabel.numberOfLines = 0
-            cell.descLabel.text = fountainPassed?.name
+            cell.descLabel.text = "\(fountainPassed!.name)  ( \(fountainPassed!.avgRating) / 5 )"
             cell.tempLabel.text = Helper.tempDescription(temp: avgTemp)
             cell.tempLabel.adjustsFontSizeToFitWidth = true
             cell.tempLabel.numberOfLines = 2
@@ -57,41 +57,49 @@ class FountainDetail : UIViewController, UITableViewDelegate, UITableViewDataSou
 
         let reviewId = fountainPassed?.reviews[indexPath.row - 1]
         
-        
         dbRef.child("reviews").child(reviewId!).observeSingleEvent(of: .value, with: { (snapshot) in
                 // Get user value
                 let value = snapshot.value as? NSDictionary
                 let review = value?["review"] as? String ?? ""
                 let rating = value?["rating"] as? Int ?? 0
                 let userId = value?["user"] as? String ?? ""
-            self.dbRef.child("users").child(userId).observeSingleEvent(of: .value, with: { (snapshot2)
-                in
-                let value2 = snapshot2.value as? NSDictionary
-                let firstName = value2?["firstName"] as? String ?? "Welper"
-                let lastName = value2?["lastName"] as? String ?? ""
-                cell.userLabel.text = "- \(firstName) \(lastName)"
-            })
-            cell.ratingControl.rating = rating
-            cell.ratingControl.canChange = false
-            cell.reviewLabel.text = "\"\(review)\""
-            cell.reviewLabel.lineBreakMode = .byWordWrapping
-            cell.reviewLabel.numberOfLines = 0
+                if let images = value?["images"] as? [String: String] {
+                    if let imgC = images["C"] {
+                        cell.leftImage.downloaded(from: images["A"] ?? "")
+                        cell.middleImage.downloaded(from: images["B"] ?? "")
+                        cell.rightImage.downloaded(from: imgC)
+                    } else if let imgB = images["B"] {
+                        cell.leftImage.downloaded(from: images["A"] ?? "")
+                        cell.rightImage.downloaded(from: imgB)
+                    } else if let imgA = images["A"] {
+                        cell.middleImage.downloaded(from: imgA)
+                    }
+                }
+                self.dbRef.child("users").child(userId).observeSingleEvent(of: .value, with: { (snapshot2)
+                   in
+                    let value2 = snapshot2.value as? NSDictionary
+                    let firstName = value2?["firstName"] as? String ?? "Welper"
+                    let lastName = value2?["lastName"] as? String ?? ""
+                    cell.userLabel.text = "- \(firstName) \(lastName)"
+                })
+                cell.ratingControl.rating = rating
+                cell.ratingControl.canChange = false
+                cell.reviewLabel.text = "\"\(review)\""
+                cell.reviewLabel.lineBreakMode = .byWordWrapping
+                cell.reviewLabel.numberOfLines = 0
+                cell.leftImage.makeCircle()
+                cell.middleImage.makeCircle()
+                cell.rightImage.makeCircle()
+                let pictureTap1 = UITapGestureRecognizer(target: self, action: #selector(FountainDetail.imageTapped))
+                let pictureTap2 = UITapGestureRecognizer(target: self, action: #selector(FountainDetail.imageTapped))
+                let pictureTap3 = UITapGestureRecognizer(target: self, action: #selector(FountainDetail.imageTapped))
+                cell.leftImage.addGestureRecognizer(pictureTap1)
+                cell.middleImage.addGestureRecognizer(pictureTap2)
+                cell.rightImage.addGestureRecognizer(pictureTap3)
             
         }) { (error) in
             print(error.localizedDescription)
         }
-//
-//        dbRef.child("reviews").queryOrdered(byChild: "user").queryEqual(toValue: userID).observeSingleEvent(of: .value, with: { snapshot in
-//            var numReviews = 0
-//            let fetchedList = snapshot.children.allObjects
-//            numReviews = fetchedList.count
-//
-//            if numReviews == 1 {
-//                self.numReviewsLabel.text = String(numReviews) + " Review"
-//            } else {
-//                self.numReviewsLabel.text = String(numReviews) + " Reviews"
-//            }
-//        })
         
         print(reviewId!)
         return cell
@@ -101,6 +109,11 @@ class FountainDetail : UIViewController, UITableViewDelegate, UITableViewDataSou
         if segue.identifier == "AddReviewSegue" {
             let vc = segue.destination as! AddReviewVC
             vc.passedFountain = fountainPassed
+        } else if segue.identifier == "CompassSegue" {
+            print("A")
+            let vc = segue.destination as! CompassVC
+            print("B")
+            vc.locPassed = fountainPassed?.coordinate
         }
     }
     
@@ -117,13 +130,64 @@ class FountainDetail : UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     @IBAction func getDirections(_ sender: Any) {
-        let waterPlacemark = MKPlacemark(coordinate: (fountainPassed?.coordinate)!)
-        let waterMapItem = MKMapItem(placemark: waterPlacemark)
-        waterMapItem.name = fountainPassed?.name
+        
+        let alertController : UIAlertController = UIAlertController(title: "How do you want to get there?", message: "Select Compass or Maps", preferredStyle: .actionSheet)
+        
+        let compassAction : UIAlertAction = UIAlertAction(title: "Compass", style: .default, handler: {(cameraAction) in
+            self.performSegue(withIdentifier: "CompassSegue", sender: self)
+        })
+        
+        let mapsAction : UIAlertAction = UIAlertAction(title: "Maps", style: .default, handler: {(libraryAction) in
+            
+            let waterPlacemark = MKPlacemark(coordinate: (self.fountainPassed?.coordinate)!)
+            let waterMapItem = MKMapItem(placemark: waterPlacemark)
+            waterMapItem.name = self.fountainPassed?.name
+            
+            
+            let mapItems = [waterMapItem]
+            let directionOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking]
+            MKMapItem.openMaps(with: mapItems, launchOptions: directionOptions)
+
+            
+        
+        })
+        
+        let cancelAction : UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel , handler: {(cancelActn) in
+            print("Cancel action was pressed")
+        })
         
         
-        let mapItems = [waterMapItem]
-        let directionOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking]
-        MKMapItem.openMaps(with: mapItems, launchOptions: directionOptions)
+        alertController.addAction(compassAction)
+        
+        alertController.addAction(mapsAction)
+        
+        alertController.addAction(cancelAction)
+        
+        alertController.popoverPresentationController?.sourceView = view
+        alertController.popoverPresentationController?.sourceRect = view.frame
+        self.present(alertController, animated: true, completion: nil)
+        
     }
+    
+    @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
+        let imageView = sender.view as! UIImageView
+        let newImageView = UIImageView(image: imageView.image)
+        newImageView.frame = UIScreen.main.bounds
+        newImageView.backgroundColor = .black
+        newImageView.contentMode = .scaleAspectFit
+        newImageView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
+        newImageView.addGestureRecognizer(tap)
+        self.view.addSubview(newImageView)
+        self.navigationController?.isNavigationBarHidden = true
+        self.tabBarController?.tabBar.isHidden = true
+    }
+
+    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
+        self.navigationController?.isNavigationBarHidden = false
+        self.tabBarController?.tabBar.isHidden = false
+        sender.view?.removeFromSuperview()
+    }
+
+    
 }
